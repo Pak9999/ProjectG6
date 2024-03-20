@@ -10,6 +10,7 @@ points_in_round = []
 
 round_count = 0
 "KOMMENTAR AV NILS IDAG 20 MARS"
+"hej"
 
 def main():
     '''Huvudfunktion som kör programmet, användare kan välja mellan att spela bingo, visa statistik eller avsluta i menyn'''
