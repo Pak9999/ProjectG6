@@ -1,0 +1,1 @@
+print("Jag har inte lärt mig något än tyvärr...")
