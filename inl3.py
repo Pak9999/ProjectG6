@@ -9,6 +9,8 @@ marked_numbers = []
 points_in_round = []
 
 round_count = 0
+"KOMMENTAR AV NILS IDAG 20 MARS"
+"hej"
 
 
 
