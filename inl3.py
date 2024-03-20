@@ -41,6 +41,9 @@ def main():
             print("Felaktig inmatning, försök igen")
 
 
+def generic_print():
+    print("Hejhopp")
+
 
 def title(message):
     '''Återanvändbar funktion som skriver ut ett meddelande'''
