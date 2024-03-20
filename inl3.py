@@ -12,6 +12,9 @@ round_count = 0
 def max_boll():
     print("Max gillar att kolla på bollar")
 
+
+def max_boll():
+    print("Max gillar att kolla på bollar")
 def main():
     '''Huvudfunktion som kör programmet, användare kan välja mellan att spela bingo, visa statistik eller avsluta i menyn'''
     global round_count
