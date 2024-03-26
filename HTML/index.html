@@ -16,7 +16,6 @@
 </head>
 
 <body>
-
     <!-- Background Video & Header -->
     <div class="banner">
         <video src="../RESOURCE/bgvid.mp4" type="video/mp4" autoplay muted loop></video>
@@ -80,10 +79,10 @@
         </div>
     </section>
 
-    <!-- Locations -->
+    <!-- Popular Destinations -->
     <section class="destination" id="destination">
         <div class="priceclass-title">
-            <h2>Destinationer</h2>
+            <h2>Populära Destinationer</h2>
         </div>
         <div class="destination-content">
             <a href="../HTML/locations.html#istanbul" target="_blank">
@@ -123,6 +122,63 @@
                     <img src="../RESOURCE/l8.jpg" alt="">
                     <h5>Italy</h5>
                     <p>Rome</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+        <!-- Continent Destinations -->
+    <section class="destination" id="destination">
+        <div class="priceclass-title">
+            <h2>Kontinenter</h2>
+        </div>
+        <div class="destination-content">
+            <a href="../HTML/locations.html#africa" target="_blank">
+                <div class="col-content">
+                    <img src="../RESOURCE/africa.jpg" alt="">
+                    <h5>Africa</h5>
+                </div>
+            </a>
+
+            <a href="./locations.html#asia" target="_blank">
+                <div class="col-content">
+                    <img src="../RESOURCE/asia.jpg" alt="">
+                    <h5>Asien</h5>
+                </div>
+            </a>
+
+            <a href="../HTML/europe.html#europe" target="">
+                <div class="col-content">
+                    <img src="../RESOURCE/europe.jpg" alt="">
+                    <h5>Europa</h5>
+                </div>
+            </a>
+
+            <a href="./locations.html#north-america" target="_blank">
+                <div class="col-content">
+                    <img src="../RESOURCE/north-america.jpeg" alt="">
+                    <h5>Nordamerika</h5>
+                </div>
+            </a>
+
+            <a href="./locations.html#south-america" target="_blank">
+                <div class="col-content">
+                    <img src="../RESOURCE/south-america.jpg" alt="">
+                    <h5>Sydamerika</h5>
+                </div>
+            </a>
+
+            <a href="./locations.html#oceania" target="_blank">
+                <div class="col-content">
+                    <img src="../RESOURCE/oceania.jpg" alt="">
+                    <h5>Oceanien</h5>
+                </div>
+            </a>
+
+            <a href="./locations.html#antarctica" target="_blank">
+                <div class="col-content">
+                    <img src="../RESOURCE/antarctis1.jpg" alt="">
+                    <h5>Antarktis</h5>
                 </div>
             </a>
         </div>
@@ -225,36 +281,55 @@
         </div>
     </section>
 
-    <!-- Footer -->
-
-    <section class="footer">
-        <div class="foot">
-            <div class="footer-content">
-
-                <div class="footlinks">
-                    <h4>Snabblänkar</h4>
-                    <ul>
-                        <li><a href="./contact.html">Kontakta oss</a></li>
-                    </ul>
-                </div>
-
-                <div class="footlinks">
-                    <h4>Hitta oss även på:</h4>
-                    <div class="social">
-                        <a href="" target="_blank"><i class='bx bxl-facebook'></i></a>
-                        <a href="" target="_blank"><i class='bx bxl-instagram'></i></a>
-                        <a href="" target="_blank"><i class='bx bxl-twitter'></i></a>
-                        <a href="" target="_blank"><i class='bx bxl-youtube'></i></a>
-                    </div>
-                </div>
-
+    <!-- Travel Quiz -->
+    <section class="quiz">
+        <div id="quiz-container">
+            <h1 class="quiz-title">Hitta din resa</h1>
+            <button id="start-btn" class="start-btn" onclick="startQuiz()">Starta quiz</button>
+            <div id="question-container">
+                <p id="question" class="quiz-question">Fråga: </p>
+                <button id="option1" class="quiz-option" onclick="selectOption(0)"></button>
+                <button id="option2" class="quiz-option" onclick="selectOption(1)"></button>
+            </div>
+            <div id="result-container">
+                <h2 id="result" class="quiz-result">Ditt resmål: </h2>
+                <button id="restart-btn" class="quiz-restart-btn" onclick="restartQuiz()">Starta om quiz</button>
             </div>
         </div>
-
-        <div class="end">
-            <p>Copyright © 2024 Away Travel</p>
-        </div>
+        <script src="../JS/quiz.js"></script>
     </section>
-</body>
+    
+    
+    
 
+        <!-- Footer -->
+        <section class="footer">
+            <div class="foot">
+                <div class="footer-content">
+    
+                    <div class="footlinks">
+                        <h4>Snabblänkar</h4>
+                        <ul>
+                            <li><a href="./contact.html">Kontakta oss</a></li>
+                        </ul>
+                    </div>
+    
+                    <div class="footlinks">
+                        <h4>Hitta oss även på:</h4>
+                        <div class="social">
+                            <a href="" target="_blank"><i class='bx bxl-facebook'></i></a>
+                            <a href="" target="_blank"><i class='bx bxl-instagram'></i></a>
+                            <a href="" target="_blank"><i class='bx bxl-twitter'></i></a>
+                            <a href="" target="_blank"><i class='bx bxl-youtube'></i></a>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+    
+            <div class="end">
+                <p>Copyright © 2024 Away Travel</p>
+            </div>
+        </section>
+</body>
 </html>
