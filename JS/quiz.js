@@ -14,10 +14,10 @@ const questions = [
 ]
 
 const destinations = [
-	"Miami, Florida, USA",
-	"Bali, Indonesien",
-	"Alperna, Schweiz",
-	"Phuket, Thailand",
+	"Istanbul, Turkiet", /* Choice 1, Choice 1, Choice 1 */
+	"Bali, Indonesien", /* Choice 1, Choice 1, Choice 2 */
+	"Paris, Frankrike", /* Choice 2, Choice 2, Choice 1 */
+	"Zermatt, Schweiz", /* Choice 2, Choice 2, Choice 2  */
 ]
 
 let currentQuestion = 0
