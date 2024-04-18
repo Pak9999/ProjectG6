@@ -1,0 +1,23 @@
+
+
+
+
+Ändra så att användaren kan skriva in namnet på föräldern istället för dess id.
+Helst se om det går att lösa så att det går att välja föräldrar i drop down menyer
+
+ex Europa --> Sverige --> Västergötland = skapa artikel för stad i Västergötland / alt poi i Västergötland
+
+ex Asien = skapa artikel för land i Asien
+
+ex Nordamerika --> USA = skapa artikel för region(stat) i USA
+
+
+
+
+CHECK IF invalid article inputs can be sent (example population for region or climate for country, or lack of population for country)
+
+
+
+
+
+Continue by altering form to follow the new javascript and ajax...
