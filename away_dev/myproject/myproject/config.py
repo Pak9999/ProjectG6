@@ -1,8 +1,9 @@
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env.example
-load_dotenv('.env.example')
+# Load environment variables from .env if it exists, otherwise use .env.example
+dotenv_files = ['.env'] if os.path.exists('.env') else ['.env.example']
+load_dotenv(*dotenv_files)
 
 DATABASES = {
     'default': {
