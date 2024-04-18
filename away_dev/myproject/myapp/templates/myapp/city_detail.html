@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ article.2 }} - artikel </title>
+</head>
+<body>
+    <h1>{{ article.2 }}</h1>
+    <h2>{{ article.3 }}</h2>
+    <p>{{ article.6 }}</p>
+
+    <p><b>Befolkning:</b> {{ article.4 }}</p>
+    <p><b>Klimat:</b> {{ article.5 }}</p>
+    <p><b>Region:</b> <a href="{% url 'region_detail' region_id %}">{{ region_name }}</a></p>
+    <p><b>Land:</b> <a href="{% url 'country_detail' country_id %}">{{ country_name }}</a></p>
+    <p><b>Kontinent:</b> <a href="{% url 'continent_detail' continent_id %}">{{ continent_name }}</a></p>
+
+    
+
+    <h3>Sevärdheter i {{ article.2 }}</h3>
+    <ul>
+        {% for poi_id, poi_name in pois %}
+            <li><a href="{% url 'poi_detail' poi_id %}">{{ poi_name }}</a></li>
+        {% endfor %}
+    </ul>
+
+
+    <p>___________________________________________________</p>
+    <br>
+    <a href="{% url 'list_continents' %}">Tillbaka till alla kontinenter</a>
+    
+</body>
+</html>

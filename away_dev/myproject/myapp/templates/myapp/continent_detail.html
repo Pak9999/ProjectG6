@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ article.2 }} - artikel </title>
+</head>
+<body>
+    <h1>{{ article.2 }}</h1>
+    <h2>{{ article.3 }}</h2>
+    <p>{{ article.4 }}</p>
+
+
+    <h3>Länder i {{ article.2 }}</h3>
+    <ul>
+        {% for country_id, country_name in countries %}
+            <li><a href="{% url 'country_detail' country_id %}">{{ country_name }}</a></li>
+        {% endfor %}
+    </ul>
+    
+    <p>___________________________________________________</p>
+    <br>
+    <a href="{% url 'list_continents' %}">Tillbaka till alla kontinenter</a>
+
+</body>
+</html>
