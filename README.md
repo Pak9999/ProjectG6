@@ -5,8 +5,7 @@
 
 # Away 
 
-A travel site based on articles with are stored in different level like Contintent, Counrty, Region, City and Point of intresst. 
-
+A travel site based on articles which are stored in different levels like Continent, Country, Region, City and Point of interest.
 
 ## Screenshots
 
