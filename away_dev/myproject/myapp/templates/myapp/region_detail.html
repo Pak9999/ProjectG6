@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ article.2 }} - artikel </title>
+    <title>{{ article.2 }} - artikel</title>
 </head>
 <body>
     <h1>{{ article.2 }}</h1>
@@ -11,7 +11,6 @@
     <p><b>Klimat:</b> {{ article.4 }}</p>    
     <p><b>Land:</b> <a href="{% url 'country_detail' country_id %}">{{ article.7 }}</a></p>
     <p><b>Kontinent:</b> <a href="{% url 'continent_detail' continent_id %}">{{ article.9 }}</a></p>
-    
 
     <h3>Städer i {{ article.2 }}</h3>
     <ul>
@@ -26,7 +25,16 @@
             <li><a href="{% url 'poi_detail' poi_id %}">{{ poi_name }}</a></li>
         {% endfor %}
     </ul>
-    
+
+    {% if tag %}
+    <h3>Taggar</h3>
+    <ul>
+        {% for tag in tags %}
+            <li>{{ tag.0 }}</li>  <!-- Assuming tag_name is at index 0 -->
+        {% endfor %}
+    </ul>
+    {% endif %}
+
     <p>___________________________________________________</p>
     <br>
     <a href="{% url 'list_continents' %}">Tillbaka till alla kontinenter</a>
