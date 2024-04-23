@@ -1,0 +1,71 @@
+/* CSS for Navbar component */
+.navbar-content {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+.navbar-content .navbar {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navbar-content .navbar .logo {
+    height: 50px;
+    width: 50px;
+}
+
+
+nav{
+    width: 100%;
+    position: fixed;
+    background: linear-gradient(90deg, rgb(46, 95, 95) 0%, rgb(164, 175, 175) 50%, rgb(124, 185, 196) 100%);
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 15%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav .logo {
+    max-width: 3%; /* Adjust as needed */
+   max-height: 3%;
+   
+    margin-left: 5%;
+}
+
+nav ul li{
+    list-style: none;
+    display: inline-block;
+    margin-left: 40px;
+}
+
+.navbar{
+    display: flex;
+    margin-right: 4vh;
+}
+
+.navbar a{
+    color: white;
+    font-size: 18px;
+    padding: 10px 22px;
+    border-radius: 4px;
+    font-weight: 500;   
+    text-decoration: none;
+    transition: ease 0.40s;
+}
+
+.navbar a:hover,.navbar a.active{
+    background: white;
+    color: black;
+    box-shadow: 5px 10px 30px rgb(85 85 85 / 20%);
+    border-radius: 5px;
+    
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 17px;
+}
