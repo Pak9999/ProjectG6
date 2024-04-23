@@ -9,9 +9,30 @@
     <h2>{{ article.3 }}</h2>
     <p>{{ article.8 }}</p>
 
-    <p><b>Landyta:</b> {{ article.5}} km&sup2;</p>
+    <p><b>Landyta:</b> {{ article.5 }} km&sup2;</p>
     <p><b>Befolkning:</b> {{ article.4 }}</p>
-    <p><b>Kontinent:</b> <a href="{% url 'continent_detail' continent_id %}"> {{ article.7 }}</a></p>    
+
+    {% if languages %}
+        <p><b>Språk:</b>
+            {% for language in languages %}
+                {{ language.0 }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+    {% endif %}
+
+    {% if currencies %}
+        <p><b>Valuta:</b> 
+            {% for currency in currencies %}
+                {{ currency.0 }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+    {% endif %}
+
+    <p><b>Kontinent:</b> <a href="{% url 'continent_detail' continent_id %}"> {{ article.7 }}</a></p>
+
+    {% if capital_city %}
+    <p><b>Huvudstad:</b> <a href="{% url 'city_detail' article.9 %}">{{ capital_city }}</a></p>
+    {% endif %}
 
     <h3>Regioner i {{ article.2 }}</h3>
     <ul>

@@ -231,7 +231,7 @@ insert into tag (tag_name)
 values ('Kultur') -- Adding tags
 
 insert into article_tag (article_id, tag_id)
-values (19, 2)   -- Adding tags to articles
+values (25, 1)   -- Adding tags to articles
 
 
 ---------------CREATE VIEWS----------------
@@ -329,8 +329,16 @@ where poi_name = 'Malmöhus slott'
 
 select * from region
 
-delete from article where article_id = 34
+
+select * from article_tag
+
+select * from article
 
 
 
+select * from country
 
+insert into article_tag (article_id, tag_id)
+values (26, 2)   -- Adding tags to articles
+
+select * from language_table

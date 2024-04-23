@@ -37,10 +37,13 @@ def continent_detail(request, continent_id):
 def country_detail(request, country_id):
     with connection.cursor() as cursor:
         cursor.execute("""
-            SELECT a.article_id, c.country_id, c.country_name, a.under_title, c.population, c.land_area, k.continent_id, k.continent_name, a.content
+            SELECT a.article_id, c.country_id, c.country_name, a.under_title, c.population, c.land_area, 
+            k.continent_id, k.continent_name, a.content, ci.city_id, ci.city_name
             FROM country c
             JOIN article a ON c.country_id = a.country_id
             JOIN continent k ON c.continent_id = k.continent_id
+            LEFT JOIN capital cap ON c.country_id = cap.country_id
+            LEFT JOIN city ci ON cap.city_id = ci.city_id
             WHERE c.country_id = %s
         """, [country_id])
         article = cursor.fetchone()
@@ -49,17 +52,38 @@ def country_detail(request, country_id):
         cursor.execute("SELECT region_id, region_name FROM region WHERE country_id = %s", [country_id])
         regions = cursor.fetchall()
 
+        #Fetch languages spoken in the country
+        cursor.execute("""
+                SELECT l.language_name 
+                FROM language_table l
+                JOIN language_in_country lc ON l.language_id = lc.language_id
+                WHERE lc.country_id = %s
+            """, [country_id])
+        languages = cursor.fetchall()
+
+        #Fetch currencies used in the country
+        cursor.execute("""
+                SELECT c.currency_name
+                FROM currency c
+                JOIN currency_in_country cc ON c.currency_id = cc.currency_id
+                WHERE cc.country_id = %s
+            """, [country_id])
+        currencies = cursor.fetchall()
+
     return render(request, 'myapp/country_detail.html', {
         'article': article,
         'regions': regions,
         'country_id': country_id,
-        'continent_id': article[6] if article else None  # Accessing continent_id safely
+        'languages': languages,
+        'currencies': currencies,
+        'continent_id': article[6] if article else None,  # Accessing continent_id safely
+        'capital_city': article[10] if article else None  # Capital city name
     })
 
 
 def region_detail(request, region_id):
     with connection.cursor() as cursor:
-        # Fetch the region's detailed article along with country and continent details
+        # Fetch region details
         cursor.execute("""
             SELECT a.article_id, r.region_id, r.region_name, a.under_title, r.climate, a.content, 
                 c.country_id, c.country_name, k.continent_id, k.continent_name
@@ -79,10 +103,20 @@ def region_detail(request, region_id):
         cursor.execute("SELECT poi_id, poi_name FROM point_of_interest WHERE in_region = %s", [region_id])
         pois = cursor.fetchall()
 
+        # Fetch tags related to the region's article
+        cursor.execute("""
+            SELECT t.tag_name
+            FROM tag t
+            JOIN article_tag at ON t.tag_id = at.tag_id
+            WHERE at.article_id = %s
+        """, [article[0]])  # Assuming article_id is at index 0
+        tags = cursor.fetchall()
+
     return render(request, 'myapp/region_detail.html', {
         'article': article,
         'cities': cities,
         'pois': pois,
+        'tags': tags,  # Add tags to the context
         'region_id': region_id,
         'country_id': article[6] if article else None,
         'continent_id': article[8] if article else None,
@@ -109,9 +143,19 @@ def city_detail(request, city_id):
         cursor.execute("SELECT poi_id, poi_name FROM point_of_interest WHERE in_city = %s", [city_id])
         pois = cursor.fetchall()
 
+        # Fetch tags related to the region's article
+        cursor.execute("""
+            SELECT t.tag_name
+            FROM tag t
+            JOIN article_tag at ON t.tag_id = at.tag_id
+            WHERE at.article_id = %s
+        """, [article[0]])  # Assuming article_id is at index 0
+        tags = cursor.fetchall()
+
     return render(request, 'myapp/city_detail.html', {
         'article': article,
         'pois': pois,
+        'tags': tags,  # Add tags to the context
         'city_id': city_id,
         'region_id': article[7],  # Assuming index for region_id
         'region_name': article[8],  # Assuming index for region_name
@@ -140,9 +184,19 @@ def poi_detail(request, poi_id):
         """, [poi_id])
         article = cursor.fetchone()
 
+        # Fetch tags related to the region's article
+        cursor.execute("""
+            SELECT t.tag_name
+            FROM tag t
+            JOIN article_tag at ON t.tag_id = at.tag_id
+            WHERE at.article_id = %s
+        """, [article[0]])  # Assuming article_id is at index 0
+        tags = cursor.fetchall()
+
     return render(request, 'myapp/poi_detail.html', {
         'article': article,
         'poi_id': poi_id,
+        'tags': tags,  # Add tags to the context
         'city_id': article[7],
         'city_name': article[4],
         'region_id': article[8],
