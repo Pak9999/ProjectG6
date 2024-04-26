@@ -26,13 +26,14 @@ nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 5%;
 }
 
 nav .logo {
-    max-width: 3%; /* Adjust as needed */
-   max-height: 3%;
+    max-width: 15%; /* Adjust as needed */
+   max-height: 15%;
    
-    margin-left: 5%;
+    margin-left: 10%;
 }
 
 nav ul li{

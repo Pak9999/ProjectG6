@@ -1,24 +1,25 @@
+import { Link } from 'react-router-dom';
+
 import logo from '../../assets/images/logo.png';
 import './Navbar.css'
 
 
+
 function Navbar() {
     return (
-        <>
-            <div className="navbar-content" id="home">
-                <nav>
+        <div className="navbar-content" id="home">
+            <nav>
+                <Link to="/">
                     <img src={logo} className="logo" alt="Logo" title="AWAY" />
-                    <ul className="navbar">
-                        <li>
-                            <a href="#home">Home</a>
-                            <a href="#destination">Destinations</a>
-                            <a href="#priceclass">Price class</a>
-                            <a href="../HTML/contact.html">Contact</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </>
+                </Link>
+                <ul className="navbar">
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/destination">Destinations</Link></li>
+                    <li><Link to="/priceclass">Price class</Link></li>
+                    <li><Link to="/contact">Contact</Link></li>
+                </ul>
+            </nav>
+        </div>
     );
 }
 
