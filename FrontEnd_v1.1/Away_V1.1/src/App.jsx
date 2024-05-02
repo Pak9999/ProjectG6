@@ -1,52 +1,23 @@
-
-import Navbar from './layout/Navbar/Navbar.jsx'
-import Header from './layout/Header/Header.jsx'
-
-import FeaturedDestinations from './sections/FeaturedDestinations/FeaturedDestinations.jsx';
-import Continents from './Continents.jsx';
-import Footer from './layout/Footer/Footer.jsx';
-import PopCarousel from './PopCarousel.jsx';
-
-import Quiz from './components/Quiz/Quiz.jsx'
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './Home.jsx';
+import ArticleTemplate from './ArticleTemplate.jsx';
+import NotFound from './NotFound.jsx';
+import About from './About.jsx';
 
 
-import Carousel from "./components/Carousel/Carousel.jsx";
-import Card from "./components/Card/Card.jsx";
-
-import Slider from "./components/Slider/Slider.jsx"
-import TravelCategory from './sections/TravelCategory/TravelCategory.jsx';
-
-/*import GoogleMaps from './GoogleMaps.jsx';*/
 
 function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/article-template" element={<ArticleTemplate />} />
+        <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
 
-    return(
-      <>
-      <Navbar></Navbar>
-      <Header></Header>
-      
-      <FeaturedDestinations></FeaturedDestinations>
-    
-      <Slider></Slider>
-   
-      <TravelCategory></TravelCategory>
-     
-
-  
-      
-      <Continents></Continents>
-     
-      <Footer></Footer>
-      <Card></Card>
-      <Carousel></Carousel>
-      
-      <Quiz></Quiz>
-
-
-      </>
-    );
-
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

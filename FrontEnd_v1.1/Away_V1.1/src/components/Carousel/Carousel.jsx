@@ -1,82 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Carousel.css';
 
-function Carousel({ children }) {
-    const [current, setCurrent] = useState(0);
-
-    const nextItem = () => setCurrent(current === children.length - 1 ? 0 : current + 1);
-    const prevItem = () => setCurrent(current === 0 ? children.length - 1 : current - 1);
-
-    return (
-        <div className="carousel-container">
-            <button onClick={prevItem}>Prev</button>
-            <div className="carousel-items">
-                {React.Children.map(children, (child, index) => (
-                    React.cloneElement(child, {
-                        className: `carousel-item ${index === current ? 'active' : ''}`,
-                        key: index
-                    })
-                ))}
-            </div>
-            <button onClick={nextItem}>Next</button>
-        </div>
-    );
-}
-
-export default Carousel;
-
-
-
-
-/*
-
-import React, { useState } from 'react';
-import './Carousel.css';
-
-
-
-
-import image12 from '../../assets/images/image12.jpg';
-import image13 from '../../assets/images/image13.jpg';
-import image14 from '../../assets/images/image14.jpg';
-import image16 from '../../assets/images/image16.jpg';
-import image17 from '../../assets/images/image17.jpg';
+import img1 from '../../assets/images/sliderimg1.jpg';
+import img2 from '../../assets/images/sliderimg2.jpg';
+import img3 from '../../assets/images/sliderimg3.jpg';
+import img4 from '../../assets/images/sliderimg4.jpg';
+import img5 from '../../assets/images/sliderimg5.jpg';
+import img6 from '../../assets/images/sliderimg6.jpg';
+import img7 from '../../assets/images/sliderimg7.jpg';
+import img8 from '../../assets/images/sliderimg8.jpg';
+import img9 from '../../assets/images/sliderimg9.jpg';
 
 const Carousel = () => {
-    const items = [
-        { image: image12, text: 'Istanbul' },
-        { image: image13, text: 'Paris' },
-        { image: image14, text: 'Bali' },
-        { image: image16, text: 'India YAOZA' },
-        { image: image17, text: 'Rome' },
-        // Add more items as needed
-    ];
+    const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9];
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [visibleImages, setVisibleImages] = useState(5);
 
-    const [activeIndex, setActiveIndex] = useState(0);
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 600) {
+                setVisibleImages(1);
+            } else if (window.innerWidth < 900) {
+                setVisibleImages(2);
+            } else {
+                setVisibleImages(4);
+            }
+        };
 
-    const goToLeft = () => {
-        setActiveIndex((activeIndex - 1 + items.length) % items.length);
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    useEffect(() => {
+        const timer = setInterval(nextSlide, 5000);
+        return () => clearInterval(timer);
+    }, [currentImageIndex]);
+
+    const nextSlide = () => {
+        const newIndex = currentImageIndex >= images.length - visibleImages ? 0 : currentImageIndex + 1;
+        setCurrentImageIndex(newIndex);
     };
 
-    const goToRight = () => {
-        setActiveIndex((activeIndex + 1) % items.length);
+    const prevSlide = () => {
+        const newIndex = currentImageIndex <= 0 ? images.length - visibleImages : currentImageIndex - 1;
+        setCurrentImageIndex(newIndex);
     };
 
     return (
-        <div className="carousel-container">
-            <button className="carousel-button carousel-button-left" onClick={goToLeft}>‹</button>
-            <div className="carousel-items">
-                {items.map((item, index) => (
-                    <div className={`carousel-item ${index === activeIndex ? 'active' : ''}`} key={index}>
-                        <img src={item.image} alt={item.text} />
-                        <div className="carousel-item-text">{item.text}</div>
-                    </div>
+        <div className="carousel" key={currentImageIndex}>
+            <button onClick={prevSlide}>&larr;</button>
+            <div className="carousel-images">
+                {images.slice(currentImageIndex, currentImageIndex + visibleImages).map((image, index) => (
+                    <img key={index} src={image} alt="" />
                 ))}
             </div>
-            <button className="carousel-button carousel-button-right" onClick={goToRight}>›</button>
+            <button onClick={nextSlide}>&rarr;</button>
         </div>
     );
 };
 
 export default Carousel;
-*/

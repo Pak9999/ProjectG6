@@ -1,8 +1,13 @@
 /* Footer */
 
+
+
+
 .footer{
     /* margin-top: 80px; */
     background: linear-gradient(90deg, rgb(164, 177, 177) 0%, rgb(111, 125, 126) 50%, rgb(75, 145, 202) 100%);
+    padding: 10px;
+    margin: 5px;
 }
 
 .foot{
@@ -83,3 +88,4 @@
     letter-spacing: 1px;
     font-weight: 300;
 }
+
