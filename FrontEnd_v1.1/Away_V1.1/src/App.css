@@ -2,15 +2,18 @@
 *{
     padding:0;
     margin:0;
-    box-sizing:border;
-    font-family:'Poppins',sans-serif;
+    box-sizing:border-box;
+    font-family: 'Roboto', sans-serif;
     text-decoration: none;
     list-style: none;
     scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    
 }
 
 body {
-    background-color: rgba(255,221,136,0.28);
+    background-color: #ffff;
     
     /* background-image: linear-gradient( 97.3deg,  rgba(2, 20, 34, 0.81) 10.7%, rgba(155,65,25,0.72) 39.5%, rgba(255,192,0,0.81) 69.7% ); */
     height: 100vh;
@@ -21,6 +24,44 @@ body {
 }
 
 
+.home,
+.destinations,
+.contact,
+.about {
+  display: flex;
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.destinations {
+    background-image: url('/images/img-2.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #fff;
+    font-size: 100px;
+  }
+  
+  .contact {
+    background-image: url('/images/img-1.jpg');
+    background-position: center;
+    background-size: fill;
+    background-repeat: no-repeat;
+    color: #fff;
+    font-size: 100px;
+  }
+  
+  .about {
+    background-image: url('/images/img-8.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #fff;
+    font-size: 100px;
+  }
+
 /* Home page */
 
 
@@ -28,14 +69,13 @@ body {
 /* CAROUSEL CSS */
 
 
-
-
+/*
 
 .carousel-parent-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 600px; /* Adjust this value as needed */
+    height: 600px; 
     margin-top: 5%;
 }
 
@@ -44,7 +84,7 @@ body {
     height: 550px;
     border-radius: 40px;
     overflow: hidden;
-    margin: 50px auto; /* This applies a 50px margin to the top and bottom, and auto margins to the left and right */
+    margin: 50px auto; 
     background-image: radial-gradient( circle 321px at 8.3% 75.7%,  rgba(209,247,241,1) 0%, rgba(249,213,213,1) 81% );
 }
 
@@ -75,14 +115,14 @@ body {
 }
 
 
-
+*/
 
 .text h2 {
  font-size: 15vh;
 text-shadow: 2px black;
 transition: ease 0.3s;
 color: transparent;
--webkit-text-stroke: 1px white;
+-webkit-text-stroke: 1px rgb(0, 0, 0);
 
 }
 
@@ -153,7 +193,7 @@ color: transparent;
     text-shadow: 2px black;
     transition: ease 0.3s;
     color: transparent;
-    -webkit-text-stroke: 5px white;
+    -webkit-text-stroke: 5px rgb(0, 0, 0);
 }
 
 .rowitems{
@@ -210,13 +250,13 @@ color: transparent;
 }
 
 .priceclass-title h2{
-    font-size: 40px;
+    font-size: 58px;
     font-weight: 650;
     padding-top: 75px;
     padding-bottom: 10px;
     line-height: 2;
-    font-size: 15vh;
-    color: white;
+    
+    color: #242424;
 }
 
 .priceclass-content{
@@ -279,11 +319,29 @@ color: transparent;
 
 /* Locations */
 
+
+.destination-container {
+    background-color: #ffffff;
+  
+}
+
 .destination-content{
     display: flex;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
     flex-wrap: wrap;
     
+    
+}
+
+
+.continent-content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    align-content: flex-start;
+    overflow: auto;
+    flex-direction: row;
 }
 
 .col-content{
@@ -296,9 +354,12 @@ color: transparent;
 .col-content img{
     margin-bottom: 40px;
     height: 500px;
+    /*
     border-radius: 27px;
+   
     width: 100%;
     box-shadow: 9px 9px 5px 0px rgba(0,0,0,0.8);
+     */
 }
 
 .col-content h5{
@@ -319,22 +380,23 @@ color: transparent;
     bottom: 80px;
     cursor: pointer;
 }
-
+/*
 .col-content:hover{
     filter: brightness(150%);
-    transform: scale(1.10);
+    transform: scale(1.05);
     cursor: pointer;
     transition: all 1s;
 }
 
 .col-content img:hover{
     margin-bottom: 40px;
-    height: 500px;
+    height: 700px;
     border-radius: 27px;
     width: 100%;
     
     
 }
+*/
 
 /* About Us */
 
@@ -409,23 +471,6 @@ color: transparent;
 }
 
 
-.social-icons a{
-    height: 40px;
-    width: 40px;
-    margin: 4px;
-    font-size: 30px;
-    color: #101010;
-    background-color: white;
-    border-radius: 20px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    transition: ease 0.30s;
-}
-
-.social-icons a:hover{
-    transform: scale(1.2);
-}
 
 /* Contact Us */
 

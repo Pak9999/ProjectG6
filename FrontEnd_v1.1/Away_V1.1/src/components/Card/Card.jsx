@@ -1,33 +1,20 @@
-import React from 'react';
-import './Card.css';
-import Carousel from '../../components/Carousel/Carousel';
-
+import paris from '../../assets/images/image13.jpg';
 import Button from '../../components/Button/Button';
 
-import image12 from '../../assets/images/image12.jpg';
-import image13 from '../../assets/images/image13.jpg';
+import './Card.css'
 
-function Card() {
-    const items = [
-        { image: image12, title: 'Istanbul', description: 'Istanbul asdaklpd  saopd aspoopasdop  opsaopsa wowepoa aodsapod dopasdksa dadopasdoad oapdka odoakd po' },
-        { image: image13, title: 'Paris', description: 'Istanbul asdaklpd  saopd aspoopasdop  opsaopsa wowepoa aodsapod dopasdksa dadopasdoad oapdka odoakd po' },
-        // Add more items as needed
-    ];
-
-    return (
-        <Carousel>
-            {items.map((item, index) => (
-                <div className="card" key={index}>
-                    <img src={item.image} alt={item.title} />
-                    <div className="card-content">
-                        <h2>{item.title}</h2>
-                        <p>{item.description}</p>
-                        <Button className="card-button">Find out more</Button>
-                    </div>
-                </div>
-            ))}
-        </Carousel>
-    );
+function Card (){
+    return(
+        <div className="card-container">
+            <img src={paris} alt="" />
+            <h2 className='card-title'>Paris</h2>
+            <p className='card-description'>Frankriker paris aalalal
+            </p>
+            <Button className="card-btn">Läs mer</Button>
+                
+           
+        </div>
+    )
 }
 
-export default Card;
+export default Card

@@ -1,18 +1,21 @@
 import React from 'react';
-import Navbar from './layout/Navbar/Navbar.jsx';
+import TestNavbar from './layout/TestNavbar/TestNavbar.jsx';
 import ArticleHeader from './layout/ArticleHeader/ArticleHeader.jsx';
 import SubHeader from './layout/SubHeader/SubHeader.jsx';
-import Footer from './layout/Footer/Footer.jsx'
+
 import ArticleSection from './layout/ArticleSection/ArticleSection.jsx';
 import ArticleTravelType from './layout/ArticleTravelType/ArticleTravelType.jsx';
 
 import Destination1 from './components/Destination1/Destination1.jsx';
 import Destination2 from './components/Destination2/Destination2.jsx';
 
+import './App.css';
+import TestFooter from './layout/TestFooter/TestFooter.jsx';
+
 function ArticleTemplate() {
     return (
         <>
-            <Navbar />
+            <TestNavbar />
             <ArticleHeader />
             <SubHeader />
             <ArticleSection />
@@ -20,7 +23,7 @@ function ArticleTemplate() {
             <Destination1 />
             <Destination2 />
 
-            <Footer />
+            <TestFooter />
             {/* Rest of your article content */}
         </>
     );

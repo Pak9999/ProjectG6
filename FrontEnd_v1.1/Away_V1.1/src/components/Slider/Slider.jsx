@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Import useEffect
 import './Slider.css';
 
 import t8 from '../../assets/images/t8.jpg';
@@ -14,6 +14,15 @@ function Slider() {
 
     const nextSlide = () => setCurrent(current === images.length - 1 ? 0 : current + 1);
     const prevSlide = () => setCurrent(current === 0 ? images.length - 1 : current - 1);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            nextSlide();
+        }, 10000); // Change image every 5 seconds
+
+        // Cleanup function to clear the interval when the component unmounts
+        return () => clearInterval(timer);
+    }, [current]);
 
     return (
         <div className="slider">
