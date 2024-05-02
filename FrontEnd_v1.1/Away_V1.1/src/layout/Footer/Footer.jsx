@@ -1,3 +1,11 @@
+
+
+/* Utdaterad Footer. Se nya korrekta TestFooter.jsx och .css */
+
+
+
+
+
 import React from 'react';
 import './Footer.css';
 

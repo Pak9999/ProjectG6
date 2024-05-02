@@ -14,10 +14,10 @@ function FeaturedDestinations() {
 
     return (
         <>
-            <section id="pop-destinations">
-            <section className="destination" id="destination">
+           
+            <section className="destination-container" id="destination">
                 <div className="priceclass-title">
-                    <h2>Popular destinations</h2>
+                    <h2>Featured destinations</h2>
                 </div>
                 <div className="destination-content">
 
@@ -70,7 +70,7 @@ function FeaturedDestinations() {
 
                 </div>
             </section>
-            </section>
+         
         </>
     );
 }

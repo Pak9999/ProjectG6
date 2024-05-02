@@ -38,6 +38,7 @@ function TravelCategory() {
                         <p>Bus, Train, etc.</p>
                     </div>
 
+
                     <div className="container-box">
                         <div className="container-image">
                             <img src={hotel} alt="Paradisresor" />

@@ -16,7 +16,7 @@ function Continents() {
                 <div className="priceclass-title">
                     <h2>Continents</h2>
                 </div>
-                <div className="destination-content">
+                <div className="continent-content">
 
                     <a href="./locations.html#africa" target="_blank">
                         <div className="col-content">
