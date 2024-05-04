@@ -1,0 +1,32 @@
+
+.article-subheader{
+    padding: none;
+    background-color: transparent;
+}
+
+
+.article-subheader-title{
+    text-align: center;
+    margin-top: 2vh;
+}
+
+.article-subheader-title h2{
+    font-size: 10vh;
+    padding-bottom: none;
+    
+    color: rgb(0, 0, 0);
+}
+
+.article-subheader-text{
+    text-align: center;
+    font-size: 3vh;
+
+}
+
+
+
+.divider {
+    text-align: center;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
