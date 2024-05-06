@@ -75,7 +75,8 @@
     text-decoration: none;
     font-size: 4vh;
     color: rgb(255, 255, 255); /* BYTER FÄRG PÅ TEXTEN I TITLEN (ITALY) */
-    padding: 14px 17px;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
 }
 

@@ -1,11 +1,14 @@
 .article-main {
-    margin-left: 20%;
-    margin-right: 10%;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 10%;
 
     padding-top: none;
-    max-width: 80vw
-
+    max-width: 80vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 
@@ -58,6 +61,8 @@
 
 .article-subheader{
     padding: none;
+    margin-left: auto;
+    margin-right: auto;
     background-color: transparent;
 }
 
