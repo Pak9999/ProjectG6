@@ -4,6 +4,8 @@ import { useParams, Link } from 'react-router-dom';
 
 import './ArticleSection.css'
 
+// This component is used to display the article section of a continent
+
 function ArticleSection() {
     const [continent, setContinent] = useState(null);
     const { continentId } = useParams();  // Match the param name used in your route

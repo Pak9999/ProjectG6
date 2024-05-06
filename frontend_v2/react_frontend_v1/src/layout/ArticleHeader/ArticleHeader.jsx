@@ -8,6 +8,7 @@ import exampleImage from '../../assets/images/italyarticleheader.png';
 import './ArticleHeader.css'
 
 
+// This component is used to display the header of the article page
 
 function ArticleHeader() {
     const navigateToArticleSection = () => {
