@@ -1,0 +1,35 @@
+/* ContinentComponent.css */
+
+.continent-container {
+    margin-bottom: 20px;
+}
+
+.continent-name {
+    font-size: 30px;
+    /* Adjust the font size as needed */
+    cursor: pointer;
+}
+
+.country-name {
+    font-size: bigger !important;
+    /* Adjust the font size as needed */
+}
+
+.country-list {
+    list-style: none;
+    padding: 0;
+}
+
+.country-list li {
+    margin-bottom: 5px;
+}
+
+.region-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+}
+
+.region-list li {
+    margin-bottom: 3px;
+}
