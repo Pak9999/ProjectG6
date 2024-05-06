@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
-import './ArticleSection.css';
+import '../ArticleSection/ArticleSection.css';
 
 function PoiArticleSection() {
     const [poi, setPoi] = useState(null);
@@ -83,7 +83,7 @@ function PoiArticleSection() {
     }
 
     return (
-        <main className="article-main" style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <main className="article-main">
             <section className="article-subheader">
                 <div className="article-subheader-title">
                     <h2>{poi.poi_name}</h2>

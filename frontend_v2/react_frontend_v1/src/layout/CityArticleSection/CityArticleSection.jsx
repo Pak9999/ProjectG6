@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
-import './ArticleSection.css';
+import '../ArticleSection/ArticleSection.css';
 
 function CityArticleSection() {
     const [city, setCity] = useState(null);

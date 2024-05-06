@@ -29,7 +29,7 @@ function ArticleSection() {
     }
 
     return (
-        <main className="article-main" style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <main className="article-main">
             <section className="article-subheader">
                 <div className="article-subheader-title">
                     <h2>{continent.continent_name}</h2>
