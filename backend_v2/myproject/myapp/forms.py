@@ -12,9 +12,9 @@ class ArticleForm(forms.ModelForm):
     parent_id = forms.IntegerField(required=False, widget=forms.HiddenInput())
     
     chosen_continent = forms.ModelChoiceField(queryset=Continent.objects.all(), label="Vald Kontinent", empty_label="Välj Kontinent", required=False)
-    chosen_country = forms.ModelChoiceField(queryset=Country.objects.all(), label="Vald Land", empty_label="Välj Land", required=False)
-    chosen_region = forms.ModelChoiceField(queryset=Region.objects.all(), label="Vald Region", empty_label="Välj Region", required=False)
-    chosen_city = forms.ModelChoiceField(queryset=City.objects.all(), label="Vald Stad", empty_label="Välj Stad", required=False)
+    chosen_country = forms.ModelChoiceField(queryset=Country.objects.all(), label="Vald Land", empty_label= "-", required=False)
+    chosen_region = forms.ModelChoiceField(queryset=Region.objects.all(), label="Vald Region", empty_label= "-", required=False)
+    chosen_city = forms.ModelChoiceField(queryset=City.objects.all(), label="Vald Stad", empty_label= "-", required=False)
 
     class Meta:
         model = Article
