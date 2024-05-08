@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from .models import Continent, Country
 
 from django.db import connection
@@ -7,55 +7,83 @@ from rest_framework.response import Response
 from rest_framework import generics
 from .models import *
 from .serializers import *
-
-from django.contrib.admin.views.decorators import staff_member_required
-from django.views.generic import TemplateView
-
-from django.core.serializers import serialize
-
-from django.http import JsonResponse
+from rest_framework.generics import RetrieveAPIView
 
 
 
-class ArticleDetailAPIView(generics.RetrieveAPIView):
+
+class ArticleDetailAPIView(generics.RetrieveAPIView):   
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
 
-class ArticleListAPIView(generics.ListAPIView):
+class ArticleListAPIView(generics.ListAPIView):     #Showed on /articles/
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     
-class ContinentListAPIView(APIView):
+
+class ContinentListAPIView(APIView):  #Showed on startpage
     def get(self, request):
         continents = Continent.objects.all()
         serializer = ContinentSerializer(continents, many=True)
         return Response(serializer.data)
+    
+    
+class ContinentDetailAPIView(RetrieveAPIView): #Showed on /continents/<int:continent_id>/  Specific data for continent articles
+    queryset = Continent.objects.all()
+    serializer_class = ContinentSerializer
+    lookup_field = 'continent_id'  # Ensure this field matches the primary key field in your Continent model
 
-class CountryListAPIView(APIView):
+
+class CountryListAPIView(APIView): #Showed as lists on continent articles
     def get(self, request):
         countries = Country.objects.all()  # Retrieve all countries from the database
         serializer = CountrySerializer(countries, many=True)  # Serialize the queryset
         return Response(serializer.data)  # Return serialized data as a response
 
-class RegionListAPIView(APIView):
+
+class CountryDetailAPIView(RetrieveAPIView): #Showed on /countries/<int:country_id>/  Specific data for country articles
+    queryset = Country.objects.all()
+    serializer_class = CountrySerializer
+    lookup_field = 'country_id'
+
+
+class RegionListAPIView(APIView): #Showed as lists on country articles
     def get(self, request):
         regions = Region.objects.all()  # Retrieve all regions from the database
         serializer = RegionSerializer(regions, many=True)  # Serialize the queryset
         return Response(serializer.data)  # Return serialized data as a response
 
 
-class CityListAPIView(APIView):
+class RegionDetailAPIView(RetrieveAPIView): #Showed on /regions/<int:region_id>/  Specific data for region articles
+    queryset = Region.objects.all()
+    serializer_class = RegionSerializer
+    lookup_field = 'region_id'
+
+
+class CityListAPIView(APIView): #Showed as lists on region articles
     def get(self, request):
         cities = City.objects.all()  # Retrieve all cities from the database
         serializer = CitySerializer(cities, many=True)  # Serialize the queryset
         return Response(serializer.data)  # Return serialized data as a response    
+    
+
+class CityDetailAPIView(RetrieveAPIView):  #Showed on /cities/<int:city_id>/  Specific data for city articles
+    queryset = City.objects.all()
+    serializer_class = CitySerializer
+    lookup_field = 'city_id'  # Ensure this field matches the primary key field in your City model
 
 
-class PointOfInterestListAPIView(APIView):
+class PointOfInterestListAPIView(APIView): #Showed as lists on city articles
     def get(self, request):
         points_of_interest = PointOfInterest.objects.all()  # Retrieve all POIs from the database
         serializer = PointOfInterestSerializer(points_of_interest, many=True)  # Serialize the queryset
         return Response(serializer.data)  # Return serialized data as a response
+    
+
+class PointOfInterestDetailAPIView(RetrieveAPIView): 
+    queryset = PointOfInterest.objects.all()
+    serializer_class = PointOfInterestSerializer
+    lookup_field = 'poi_id'  # Ensure this field matches the primary key field in your PointOfInterest model
 
 
 
@@ -207,7 +235,6 @@ def poi_detail(request, poi_id):
         'country_id': article[9],
         'continent_id': article[11]
     })
-
 
 from django.http import JsonResponse
 
