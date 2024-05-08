@@ -32,7 +32,15 @@ urlpatterns = [
     path('region/<int:region_id>/', views.region_detail, name='region_detail'),
     path('city/<int:city_id>/', views.city_detail, name='city_detail'),
     path('poi/<int:poi_id>/', views.poi_detail, name='poi_detail'),
+    
+    path('ajax/get_continents/', get_continents, name='get_continents'),
     path('ajax/get_countries_for_continent/', get_countries_for_continent, name='get_countries_for_continent'),
+    path('ajax/get_regions_for_country/', get_regions_for_country, name='get_regions_for_country'),
+    path('ajax/get_cities_for_region/', get_cities_for_region, name='get_cities_for_region'),
+    path('ajax/get_pois_for_city/', get_pois_for_city, name='get_pois_for_city'),
+    path('ajax/get_country_id_for_continent/', views.get_country_id_for_continent, name='get_country_id_for_continent'),
+    path('ajax/get_region_id_for_country/', views.get_region_id_for_country, name='get_region_id_for_country'),
+    path('ajax/get_city_id_for_region/', views.get_city_id_for_region, name='get_city_id_for_region'),
 ]
 
 

@@ -126,6 +126,34 @@ class Article(models.Model):
     def __str__(self):
         return f"{self.under_title}: {self.content[:50]}..."  # Display the title and part of the content
 
+#getting the ids of the geographical levels based on the parent id
+
+def get_country_id_based_on_continent(continent_id):
+    try:
+        country = Country.objects.filter(continent_id=continent_id).first()
+        if country:
+            return country.country_id
+    except Country.DoesNotExist:
+        pass
+    return None
+
+def get_region_id_based_on_country(country_id):
+    try:
+        region = Region.objects.filter(country_id=country_id).first()
+        if region:
+            return region.region_id
+    except Region.DoesNotExist:
+        pass
+    return None
+
+def get_city_id_based_on_region(region_id):
+    try:
+        city = City.objects.filter(region_id=region_id).first()
+        if city:
+            return city.city_id
+    except City.DoesNotExist:
+        pass
+    return None
 
 
 

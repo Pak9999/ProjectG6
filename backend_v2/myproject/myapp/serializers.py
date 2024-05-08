@@ -2,10 +2,6 @@
 from rest_framework import serializers
 from .models import *
 
-
-from rest_framework import serializers
-from .models import Continent, Country, Region, City, PointOfInterest, Article
-
 class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article

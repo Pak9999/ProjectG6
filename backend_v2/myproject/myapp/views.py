@@ -236,14 +236,53 @@ def poi_detail(request, poi_id):
         'continent_id': article[11]
     })
 
-
-
-
-
-
 from django.http import JsonResponse
+
+def get_continents(request):
+    continents = Continent.objects.all()  # Retrieve all continents from the database
+    continent_data = [{'id': continent.continent_id, 'name': continent.continent_name} for continent in continents]
+    return JsonResponse({'continents': continent_data})
 
 def get_countries_for_continent(request):
     continent_id = request.GET.get('continent_id')
-    countries = Country.objects.filter(continent_id=continent_id).values('id', 'name')
+    countries = Country.objects.filter(continent_id=continent_id).values('country_id', 'country_name')
     return JsonResponse(list(countries), safe=False)
+
+def get_regions_for_country(request):
+    country_id = request.GET.get('country_id')
+    regions = Region.objects.filter(country_id=country_id).values('region_id', 'region_name')
+    return JsonResponse(list(regions), safe=False)
+
+def get_cities_for_region(request):
+    region_id = request.GET.get('region_id')
+    cities = City.objects.filter(region_id=region_id).values('city_id', 'city_name')
+    return JsonResponse(list(cities), safe=False)
+
+def get_pois_for_city(request):
+    city_id = request.GET.get('city_id')
+    region_id = request.GET.get('region_id')
+
+    if city_id:
+        pois = PointOfInterest.objects.filter(city_id=city_id).values('poi_id', 'poi_name')
+    elif region_id:
+        pois = PointOfInterest.objects.filter(region_id=region_id).values('poi_id', 'poi_name')
+    else:
+        pois = []
+
+    return JsonResponse(list(pois), safe=False)
+
+# Add new views to fetch parent IDs based on selected options
+def get_country_id_for_continent(request):
+    continent_id = request.GET.get('continent_id')
+    country_id = get_country_id_based_on_continent(continent_id)
+    return JsonResponse({'country_id': country_id})
+
+def get_region_id_for_country(request):
+    country_id = request.GET.get('country_id')
+    region_id = get_region_id_based_on_country(country_id)
+    return JsonResponse({'region_id': region_id})
+
+def get_city_id_for_region(request):
+    region_id = request.GET.get('region_id')
+    city_id = get_city_id_based_on_region(region_id)
+    return JsonResponse({'city_id': city_id})
