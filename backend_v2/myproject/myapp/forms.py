@@ -22,7 +22,7 @@ class ArticleForm(forms.ModelForm):
         
     place_name = forms.CharField(required=False, label="Platsnamn")
     population = forms.IntegerField(required=False, label="Befolkningsantal")
-    land_area = forms.IntegerField(required=False, label="Yta")
+    land_area = forms.IntegerField(required=False, label="Yta i km2")
     climate = forms.CharField(required=False, label="Klimat")
     poi_parent_type = forms.ChoiceField(choices=[
         ('', '--- För sevärdhet ---'),   #TODO CHECK RELEVANCY TO POI_PARENT_CHOICE

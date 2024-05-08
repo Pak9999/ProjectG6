@@ -79,7 +79,7 @@ class PointOfInterest(models.Model):
         verbose_name_plural = 'Points of Interest'
         constraints = [
             models.CheckConstraint(
-                check=models.Q(region__isnull=True, city__isnull=False) | models.Q(region__isnull=False, city__isnull=True),
+                check=models.Q(region__isnull=False, city__isnull=True) | models.Q(region__isnull=True, city__isnull=False),
                 name='check_poi_region_city_exclusivity'
             )
         ]

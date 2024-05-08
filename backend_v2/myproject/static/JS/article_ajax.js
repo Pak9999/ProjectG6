@@ -153,6 +153,4 @@ $(document).ready(function() {
         }
     });
 
-    
-
 });
