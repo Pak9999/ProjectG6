@@ -24,41 +24,17 @@ Go to the project directory
 ```bash
   cd myproject
 ```
-Install python dependencies 
+
+Install dependencies 
 
 ```bash
   pip install -r requirements.txt
 ```
-Go to the frontend directory
 
-```bash
-  cd react_frontend_v1
-```
-
-Install npm stuff 
-
-```bash
-  npm install 
-```
-
-```bash
-  npm install -g create-vite
-```
-
-```bash
-  npm i axios
-```
-
-Start the backend-server
+Start the server
 
 ```bash
   py manage.py runserver
-```
-
-Start the backend-server
-
-```bash
-  npm run dev
 ```
 
 ## Authors
