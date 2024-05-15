@@ -2,10 +2,17 @@
 from rest_framework import serializers
 from .models import *
 
+class PlacedImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PlacedImage
+        fields = ['image_url']
+
 class ArticleSerializer(serializers.ModelSerializer):
+    images = PlacedImageSerializer(many=True, read_only=True)
+
     class Meta:
         model = Article
-        fields = ['article_id', 'under_title', 'content']
+        fields = ['article_id', 'under_title', 'content', 'images']
         
 class PointOfInterestSerializer(serializers.ModelSerializer):
     articles = ArticleSerializer(many=True, source='article_set', read_only=True)

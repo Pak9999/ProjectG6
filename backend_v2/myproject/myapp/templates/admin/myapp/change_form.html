@@ -36,7 +36,7 @@
                 </ul>
             {% endif %}
         {% endblock %}
-        <form {% if has_file_field %}enctype="multipart/form-data" {% endif %}{% if form_url %}action="{{ form_url }}" {% endif %}method="post" id="{{ opts.model_name }}_form" novalidate>
+        <form enctype="multipart/form-data" {% if form_url %}action="{{ form_url }}" {% endif %}method="post" id="{{ opts.model_name }}_form" novalidate>
             {% csrf_token %}
             {% block form_top %}{% endblock %}
             <div>
@@ -66,17 +66,22 @@
                     {% for fieldset in adminform %}
                         {% include "admin/includes/fieldset.html" %}
                     {% endfor %}
-                {% endblock %}                
+                {% endblock %}
+                
                 {% block after_field_sets %}{% endblock %}
+                
                 {% block inline_field_sets %}
                     {% for inline_admin_formset in inline_admin_formsets %}
                         {% include inline_admin_formset.opts.template %}
                     {% endfor %}
                 {% endblock %}
+                
                 {% block after_related_objects %}{% endblock %}
+                
                 {% block submit_buttons_bottom %}
                     {% submit_row %}
                 {% endblock %}
+                
                 {% block admin_change_form_document_ready %}
                     <script id="django-admin-form-add-constants"
                             {% if adminform and add %}
@@ -89,7 +94,6 @@
             </div>
         </form>
     </div>
-    
 {% endblock %}
 
 {% block extrastyle %}
