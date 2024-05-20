@@ -12,6 +12,14 @@ class Continent(models.Model):
     
     def __str__(self):
         return self.continent_name
+    
+    def get_image_url(self):
+        # Assuming 'article_set' is the related name from Article to Continent
+        articles = self.article_set.all()
+        for article in articles:
+            if article.images.exists():  # assuming 'images' is the related name from Article to PlacedImage
+                return article.images.first().image_url.url  # Return the URL of the first image found
+        return None  # return a default image URL or None
 
 class Country(models.Model):
     country_id = models.AutoField(primary_key=True)

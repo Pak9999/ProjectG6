@@ -49,6 +49,11 @@ class CountrySerializer(serializers.ModelSerializer):
 class ContinentSerializer(serializers.ModelSerializer):
     countries = CountrySerializer(many=True, read_only=True)
     articles = ArticleSerializer(many=True, source='article_set', read_only=True)
+    image_url = serializers.SerializerMethodField()
+
     class Meta:
         model = Continent
-        fields = ['continent_id', 'continent_name', 'countries', 'articles']
+        fields = ['continent_id', 'continent_name', 'countries', 'articles', 'image_url']
+
+    def get_image_url(self, obj):
+        return obj.get_image_url()

@@ -1,31 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import africa from '../../assets/images/africa.jpg'; // Add this line
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
-import './App.css'
 
+import './ContinentComponent.css';
 
-const ContinentComponent = ({ countries }) => {
+import './App.css';
+
+const ContinentComponent = () => {
   const [continents, setContinents] = useState([]);
-  const [regions, setRegions] = useState([]);
-  const [cities, setCities] = useState([]);
-  const [pointsOfInterest, setPointsOfInterest] = useState([]);
+  const baseUrl = 'http://localhost:8000'; // This should be the base URL of your Django backend
+  const settings = {
+    dots: true,
+    arrows: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 7,
+    
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const continentResponse = await axios.get('http://localhost:8000/api/continents/');
-        setContinents(continentResponse.data);
-
-        const regionResponse = await axios.get('http://localhost:8000/api/regions/');
-        setRegions(regionResponse.data);
-
-        const cityResponse = await axios.get('http://localhost:8000/api/cities/');
-        setCities(cityResponse.data);
-
-        const poiResponse = await axios.get('http://localhost:8000/api/PointsOfInterest/');
-        setPointsOfInterest(poiResponse.data);
+        const { data } = await axios.get(`${baseUrl}/api/continents/`);
+        setContinents(data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -34,58 +35,23 @@ const ContinentComponent = ({ countries }) => {
     fetchData();
   }, []);
 
-  const [activeContinent, setActiveContinent] = useState(null);
-  const [activeCountry, setActiveCountry] = useState(null);
-  const [activeRegion, setActiveRegion] = useState(null);
-  const [activeCity, setActiveCity] = useState(null);
-
-  const toggleCountryList = continentId => {
-    setActiveContinent(activeContinent === continentId ? null : continentId);
-    setActiveCountry(null);
-    setActiveRegion(null);
-    setActiveCity(null);
-  };
-
-  const toggleRegionList = countryId => {
-    setActiveCountry(activeCountry === countryId ? null : countryId);
-    setActiveRegion(null);
-    setActiveCity(null);
-  };
-
-  const toggleCityList = regionId => {
-    setActiveRegion(activeRegion === regionId ? null : regionId);
-    setActiveCity(null);
-  };
-
-  const togglePoiList = cityId => {
-    setActiveCity(activeCity === cityId ? null : cityId);
-  };
-
   return (
     <section className="destination" id="destination">
       <div className="priceclass-title">
         <h2>Continents</h2>
       </div>
-
-      <div className="continent-content">
-
+      <Slider {...settings}>
         {continents.map(continent => (
           <div key={continent.continent_id}>
-              <div onMouseEnter={() => toggleCountryList(continent.continent_id)}>
-                  <Link to={`/continent/${continent.continent_id}`}>
-                    <div className="col-content">
-
-                      <img src={africa} alt="Africa"/>
-                      <h5>{continent.continent_name}</h5>
-
-                    </div>
-                  </Link>
+            <Link to={`/continent/${continent.continent_id}`}>
+              <div className="col-content">
+                <img src={continent.image_url ? `${baseUrl}${continent.image_url}` : 'path_to_default_image.jpg'} alt={continent.continent_name} />
+                <h5>{continent.continent_name}</h5>
               </div>
-            </div>
-
+            </Link>
+          </div>
         ))}
-
-      </div>
+      </Slider>
     </section>
   );
 };

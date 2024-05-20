@@ -131,11 +131,25 @@ create table img_dump (
 	img_url bytea
 )
 
-create table placed_img (
-	img_id int references img_dump(img_id),
-	article_id int references article(article_id),
-	primary key (img_id, article_id)
-)
+
+
+CREATE TABLE placed_img (
+    image_id SERIAL PRIMARY KEY,
+    article_id INTEGER NOT NULL,
+    image_url VARCHAR(255),
+    FOREIGN KEY (article_id) REFERENCES article(article_id) ON DELETE CASCADE
+);
+
+select * from placed_img
+
+
+select * from full_continent_article
+
+insert into placed_img (article_id, image_url)
+values (7, 'images/southamerica.jpg')
+
+4
+
 
 ---------------GENERIC INSERTS----------------
 
