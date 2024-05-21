@@ -59,18 +59,20 @@ class ArticleForm(forms.ModelForm):
                 country_id = int(self.data.get('chosen_country'))
                 self.fields['chosen_region'].queryset = Region.objects.filter(country_id=country_id)
             except (ValueError, TypeError):
-                pass
-        elif self.instance.pk:
-            self.fields['chosen_region'].queryset = self.instance.country.region_set
+                self.fields['chosen_region'].queryset = Region.objects.none()
+        elif self.instance.pk and self.instance.country:
+            self.fields['chosen_region'].queryset = self.instance.country.region_set.all()
+        else:
+            self.fields['chosen_region'].queryset = Region.objects.none()
             
-        elif 'chosen_region' in self.data:
+        if 'chosen_region' in self.data:
             try:
                 region_id = int(self.data.get('chosen_region'))
                 self.fields['chosen_city'].queryset = City.objects.filter(region_id=region_id)
             except (ValueError, TypeError):
                 self.fields['chosen_city'].queryset = City.objects.none()
         elif self.instance.pk and self.instance.region:
-            self.fields['chosen_city'].queryset = self.instance.region.city_set
+            self.fields['chosen_city'].queryset = self.instance.region.city_set.all()
         else:
             self.fields['chosen_city'].queryset = City.objects.none()
 
@@ -128,8 +130,8 @@ class ArticleForm(forms.ModelForm):
             if chosen_parent_type == 'region' and chosen_region:   
                 poi = PointOfInterest.objects.create(
                     poi_name=place_name,
-                    region = chosen_region,
-                    city = None
+                    region=chosen_region,
+                    city=None
                 )
                 instance.poi = poi
                 instance.parent_id = chosen_region.pk
@@ -139,8 +141,8 @@ class ArticleForm(forms.ModelForm):
             elif chosen_parent_type == 'city' and chosen_city:
                 poi = PointOfInterest.objects.create(
                     poi_name=place_name,
-                    city = chosen_city,
-                    region = None
+                    city=chosen_city,
+                    region=None
                 )
                 instance.poi = poi
                 instance.parent_id = chosen_city.pk
@@ -184,8 +186,8 @@ class ArticleForm(forms.ModelForm):
             elif chosen_continent:
                 # creates a new country if it does not exist
                 country, created = Country.objects.get_or_create(
-                    country_name = place_name,
-                    continent = chosen_continent
+                    country_name=place_name,
+                    continent=chosen_continent
                 )
                 # Set population and land area if available
                 if population is not None:
@@ -196,14 +198,7 @@ class ArticleForm(forms.ModelForm):
                 instance.country = country
                 instance.parent_id = chosen_continent.pk  # Set the parent_id to the continent's primary key
             
-            elif commit:
+            if commit:
                 instance.save()  # Now save the Article instance to the database
                 self.save_m2m()  # Save many-to-many data if applicable
         return instance
-
-
-
-
-
-
-
