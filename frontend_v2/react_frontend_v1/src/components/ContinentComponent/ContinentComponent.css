@@ -1,28 +1,96 @@
-/* ContinentComponent.css */
 
 
-.destination {
-    margin-left: auto;
-    margin-right: auto;
+/* Custom styles for slick arrows */
+
+.slider-cont .slick-slide {
+    padding: 10px;
 }
 
-.col-content {
-    width: 15vw;       /* Fixed width for all columns */
-    height: 40vh;
-    margin-bottom: 2vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+.slick-prev,
+.slick-next {
+    z-index: 20;
+    opacity: 1 !important;
+    display: block !important;
+    background: url('path_to_arrow_image') no-repeat center center; /* Specify your arrow image */
+    height: 40px; /* Adjust size accordingly */
+    width: 40px; /* Adjust size accordingly */
 }
 
+.slick-prev {
+    left: 20px; /* Adjust distance from the left edge */
+}
+
+.slick-next {
+    right: 55px; /* Adjust distance from the right edge */
+}
+
+/* Styles for dots */
+.slick-dots {
+    bottom: -35px; /* More space below slider */
+    li button:before {
+        font-size: 12px; /* Larger dot size */
+        color: #ccc; /* Adjust dot color for visibility */
+        opacity: 1;
+        font-weight: bold; /* Bolder dots */
+    }
+    li.slick-active button:before {
+        color: #000; /* Color for active dot */
+    }
+}
+
+.slick-prev:before,
+.slick-next:before {
+    font-size: 50px; /* Larger font size */
+    color: rgb(0, 0, 0); /* Or any color you prefer */
+    background-color: white;
+    border-radius: 20px;
+    padding: 4px 15px 10px 10px;
+    font-weight: bold; /* Bolder font weight */
+}
+
+
+.slider-cont {
+
+    margin-bottom: 100px;
+
+
+}
+
+
+.col-content{
+    position: relative;
+    filter:brightness(95%);
+    transition: all 0.3s cubic-bezier(0.445,0.05,0.55,0.95);
+    transition: transform .2s ease-in-out;
+    border-radius: 5px;
+
+
+
+}
+
+.col-content:hover {
+    transform: scale(1.03);
+}
 
 
 .col-content img {
-    width: 100%;
-    height: 100%;
+    width: 15vw;
+    height: 40vh;
     object-fit: cover;
-    margin-bottom: 0;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 0.5px rgba(0, 0, 0, 0.2);
+}
+
+
+.col-content h5{
+    position: absolute;
+    font-size: 25px;
+    color: white;
+    font-weight: 500;
+    left: 20px;
+    bottom: 50px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.589);
+    padding: 7px;
+    border-radius: 10px;
 }
