@@ -24,38 +24,46 @@ Go to the project directory
 ```bash
   cd myproject
 ```
-Install python dependencies 
+To install the python dependencies, run:
 
 ```bash
   pip install -r requirements.txt
 ```
+
+Add the private database connection details acording to this template into the .env.example
+```bash
+DB_NAME=xxxx
+DB_USER=xxxx
+DB_PASSWORD=xxxx
+DB_HOST=xxxx
+DB_PORT=xxxx
+```
+
 Go to the frontend directory
 
 ```bash
   cd react_frontend_v1
 ```
 
-Install npm stuff 
+To install the dependencies and set up the front-end, run:
 
 ```bash
   npm install 
 ```
 
-```bash
-  npm install -g create-vite
-```
-
-```bash
-  npm i axios
-```
-
 Start the backend-server
+```bash
+  cd myproject
+```
 
 ```bash
   py manage.py runserver
 ```
 
 Start the backend-server
+```bash
+  cd react_frontend_v1
+```
 
 ```bash
   npm run dev
