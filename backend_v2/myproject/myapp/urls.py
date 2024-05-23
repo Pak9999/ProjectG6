@@ -3,12 +3,17 @@ from . import views
 from .views import *
 from . import views
 
-
+'''
+path('api/articles/search', search_view, name='article-search'),
+'''
 
 urlpatterns = [
     path('api/articles/<int:pk>/', views.ArticleDetailAPIView.as_view(), name='article-detail'),
     path('api/articles/', ArticleListAPIView.as_view(), name='article-list'),
-    
+    path('api/search/', ArticleSearchAPIView.as_view(), name='article-search-api'),
+    path('api/search/', ArticleSearchAPIView.as_view(), name='article-search'),
+
+
     path('api/continents/', ContinentListAPIView.as_view(), name='continent-list'),
     path('api/continents/<int:continent_id>/', views.ContinentDetailAPIView.as_view(), name='continent-detail'),
 
@@ -41,6 +46,7 @@ urlpatterns = [
     path('ajax/get_country_id_for_continent/', views.get_country_id_for_continent, name='get_country_id_for_continent'),
     path('ajax/get_region_id_for_country/', views.get_region_id_for_country, name='get_region_id_for_country'),
     path('ajax/get_city_id_for_region/', views.get_city_id_for_region, name='get_city_id_for_region'),
+    path('search/', views.search_view, name='search'),
 ]
 
 

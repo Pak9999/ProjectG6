@@ -1,16 +1,61 @@
 from django.shortcuts import render
-from .models import Continent, Country
+from .models import Continent, Country, Article, Region, City, PointOfInterest
 
 from django.db import connection
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import generics
 from .models import *
 from .serializers import *
 from rest_framework.generics import RetrieveAPIView
+from rest_framework.permissions import AllowAny
+from django.db.models import Q
+from rest_framework.generics import ListAPIView
+from myapp.models import Article, Country, Region, City, PointOfInterest
+from myapp.serializers import ArticleSerializer
+import logging
 
+@api_view(['GET'])
+def search_view(request):
+    query = request.GET.get('q', None)
+    if query:
+        articles = Article.objects.filter(
+            Q(under_title__icontains=query) |
+            Q(content__icontains=query)
+        )
+    else:
+        articles = Article.objects.none()
+    serializer = ArticleSerializer(articles, many=True)
+    return Response(serializer.data)
 
+class ArticleSearchAPIView(generics.ListAPIView):
+    serializer_class = ArticleSerializer
+    permission_classes = [AllowAny]
 
+    def get_queryset(self):
+        query = self.request.query_params.get('q', None)
+        if query:
+            countries = Country.objects.filter(Q(country_name__icontains=query))
+            regions = Region.objects.filter(Q(region_name__icontains=query) | Q(country__in=countries))
+            cities = City.objects.filter(Q(city_name__icontains=query) | Q(region__in=regions))
+            pois = PointOfInterest.objects.filter(Q(poi_name__icontains=query) | Q(city__in=cities))
+
+            articles = Article.objects.filter(
+                Q(content__icontains=query) |
+                Q(under_title__icontains=query) |
+                Q(country__in=countries) |
+                Q(region__in=regions) |
+                Q(city__in=cities) |
+                Q(poi__in=pois)
+            ).distinct()
+            return articles
+        return Article.objects.none()
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
 class ArticleDetailAPIView(generics.RetrieveAPIView):   
     queryset = Article.objects.all()

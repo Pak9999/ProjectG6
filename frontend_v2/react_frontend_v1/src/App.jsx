@@ -13,7 +13,7 @@ import RegionArticlePage from './RegionArticlePage';  // Make sure this import i
 import CityArticlePage from './CityArticlePage';  // Make sure this import is correct
 import PointOfInterestArticlePage from './PointOfInterestArticlePage';  // Make sure this import is correct
 
-
+import SearchResult from './SearchResults.jsx';
 
 import ContinentComponent from './components/ContinentComponent/ContinentComponent.jsx';
 
@@ -42,6 +42,7 @@ function App() {
         <Route path="/article-template" element={<ArticleTemplate />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/search" element={<SearchResult />} />
 
         {/* Pass countries data as props to ContinentComponent */}
         <Route path="/" element={<ContinentComponent countries={countries} />} />
@@ -55,6 +56,8 @@ function App() {
         <Route path="/city/:cityId" element={<CityArticlePage />} />
 
         <Route path="/poi/:poiId" element={<PointOfInterestArticlePage />} />
+
+        <Route path="/search" component={SearchResult} /> {}
 
       </Routes>
     </Router>

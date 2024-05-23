@@ -3,9 +3,9 @@
 
 import React, { useState } from 'react';
 import './TestNavbar.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
-import Button from '../../components/Button/Button';
+
 import homelogo from '../../assets/images/home.png'
 import paperplane from '../../assets/images/paper-plane.png'
 import questionmark from '../../assets/images/question-sign.png'
@@ -13,6 +13,13 @@ import questionmark from '../../assets/images/question-sign.png'
 
 function TestNavbar() {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        navigate(`/search?q=${searchQuery}`);
+    };
 
     return (
         <nav className="test-navbar">
@@ -40,10 +47,18 @@ function TestNavbar() {
                 </li>
 
                 <li className="test-nav-item">
-                    <Button className="signin-button">Sign In</Button>
+                    <form onSubmit={handleSearch}>
+                        <input 
+                            type="text" 
+                            placeholder="Search..." 
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="search-input"
+                        />
+                        <button type="submit" className="search-button">Search</button>
+                    </form>
                 </li>
             </ul>
-
         </nav>
     );
 }
