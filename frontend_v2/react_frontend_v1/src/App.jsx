@@ -13,6 +13,8 @@ import RegionArticlePage from './RegionArticlePage';
 import CityArticlePage from './CityArticlePage';  
 import PointOfInterestArticlePage from './PointOfInterestArticlePage';  
 import SearchResultSection from './layout/SearchResultSection/SearchResultSection';
+import ArticleDetail from './layout/ArticleDetail/ArticleDetail.jsx'; 
+
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -36,13 +38,14 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/article-template" element={<ArticleTemplate />} />
         <Route path="/about" element={<About />} />
-        <Route path="/search" element={<SearchResultSection />} /> 
+        <Route path="*" element={<NotFound />} />
+        <Route path="/search" element={<SearchResultSection />} />
+        <Route path="/articles/:articleId" element={<ArticleDetail />} /> {/* Add this line */}
         <Route path="/continent/:continentId" element={<ContinentArticlePage />} />
         <Route path="/country/:countryId" element={<CountryArticlePage />} />
         <Route path="/region/:regionId" element={<RegionArticlePage />} />
         <Route path="/city/:cityId" element={<CityArticlePage />} />
         <Route path="/poi/:poiId" element={<PointOfInterestArticlePage />} />
-        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
