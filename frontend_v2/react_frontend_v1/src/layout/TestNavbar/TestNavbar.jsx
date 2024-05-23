@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 import './TestNavbar.css';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
-
 import homelogo from '../../assets/images/home.png'
 import paperplane from '../../assets/images/paper-plane.png'
 import questionmark from '../../assets/images/question-sign.png'
@@ -21,6 +20,7 @@ function TestNavbar() {
         navigate(`/search?q=${searchQuery}`);
     };
 
+
     return (
         <nav className="test-navbar">
             <div className="test-logo-container">
@@ -34,18 +34,21 @@ function TestNavbar() {
             </div>
             <ul className={showMobileMenu ? 'test-nav-menu active' : 'test-nav-menu'}>
                 <li className="test-nav-item">
-                    <img src={homelogo} alt="" style={{ width: '30px', padding: '5px 5px 6px 5px', }} />
+                    <img src={homelogo} alt="" style={{ width: '30px', padding: '5px 5px 6px 5px' }} />
                     <Link to="/" className='test-nav-links'>Home</Link>
                 </li>
                 <li className="test-nav-item">
-                    <img src={paperplane} alt="" style={{ width: '30px', padding: '5px 5px 6px 5px', }} />
+                    <img src={paperplane} alt="" style={{ width: '30px', padding: '5px 5px 6px 5px' }} />
                     <Link to="/article-template" className='test-nav-links'>Destinations</Link>
                 </li>
                 <li className="test-nav-item">
-                    <img src={questionmark} alt="" style={{ width: '30px', padding: '5px 5px 6px 5px', }} />
+                    <img src={questionmark} alt="" style={{ width: '30px', padding: '5px 5px 6px 5px' }} />
                     <Link to="/About" className='test-nav-links'>About</Link>
                 </li>
-
+                <li className="test-nav-item">
+                    <img src={questionmark} alt="" style={{ width: '30px', padding: '5px 5px 6px 5px' }} />
+                    <Link to="/About" className='test-nav-links'>About</Link>
+                </li>
                 <li className="test-nav-item">
                     <form onSubmit={handleSearch}>
                         <input 
@@ -64,4 +67,3 @@ function TestNavbar() {
 }
 
 export default TestNavbar;
-

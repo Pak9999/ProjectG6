@@ -2,22 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 
-
+// Import all necessary components
 import Home from './Home.jsx';
 import ArticleTemplate from './ArticleTemplate.jsx';
 import NotFound from './NotFound.jsx';
 import About from './About.jsx';
 import ContinentArticlePage from './ContinentArticlePage.jsx';
-import CountryArticlePage from './CountryArticlePage'; // Adjust the path based on your file structure
-import RegionArticlePage from './RegionArticlePage';  // Make sure this import is correct
-import CityArticlePage from './CityArticlePage';  // Make sure this import is correct
-import PointOfInterestArticlePage from './PointOfInterestArticlePage';  // Make sure this import is correct
-
-import SearchResult from './SearchResults.jsx';
-
-import ContinentComponent from './components/ContinentComponent/ContinentComponent.jsx';
-
-
+import CountryArticlePage from './CountryArticlePage'; 
+import RegionArticlePage from './RegionArticlePage';  
+import CityArticlePage from './CityArticlePage';  
+import PointOfInterestArticlePage from './PointOfInterestArticlePage';  
+import SearchResultSection from './layout/SearchResultSection/SearchResultSection';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -41,24 +36,13 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/article-template" element={<ArticleTemplate />} />
         <Route path="/about" element={<About />} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="/search" element={<SearchResult />} />
-
-        {/* Pass countries data as props to ContinentComponent */}
-        <Route path="/" element={<ContinentComponent countries={countries} />} />
-        {/* Add a route for individual continent */}
+        <Route path="/search" element={<SearchResultSection />} /> 
         <Route path="/continent/:continentId" element={<ContinentArticlePage />} />
-
         <Route path="/country/:countryId" element={<CountryArticlePage />} />
-
         <Route path="/region/:regionId" element={<RegionArticlePage />} />
-
         <Route path="/city/:cityId" element={<CityArticlePage />} />
-
         <Route path="/poi/:poiId" element={<PointOfInterestArticlePage />} />
-
-        <Route path="/search" component={SearchResult} /> {}
-
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
