@@ -18,7 +18,7 @@
     width: 80%;
     padding-top: 2%;
     padding-right: 2%;
-    
+
 }
 
 .article-section-text {
@@ -32,28 +32,42 @@
 
 
 .article-aside {
-    background-color: transparent;
+    background-color: rgb(48, 48, 48);
+    border: solid black;
     width: 20%;
     padding-left: 2%;
     padding-top: 2%;
-
+    float: left;
 }
 
 
 .article-aside h2 {
-    margin-bottom: none; /* Adjust as needed */
+    margin-bottom: none; 
+    color: white;
+    text-decoration: underline;
 }
 
 .article-aside p,
 .article-aside ul {
-    margin-bottom: none; /* Adjust as needed */
+    margin-bottom: none; 
+    color: white;
+}
+
+.article-aside a:hover,
+.article-aside a:focus {
+    color: white;
+    font-size: larger;
+}
+
+.article-aside a:visited,
+.article-aside a {
+    color: white;
 }
 
 .article-aside ul li {
-    margin-bottom: none; /* Adjust as needed */
+    margin-bottom: none; 
+    color: white;
 }
-
-
 
 .article-subheader{
     padding: none;
