@@ -12,16 +12,55 @@ from rest_framework.generics import RetrieveAPIView
 
 
 
-class ArticleDetailAPIView(generics.RetrieveAPIView):   
+class ArticleDetailAPIView(generics.RetrieveAPIView):
+    '''
+    Retrieve a specific article.
+
+    Attributes:
+    - queryset: Queryset of all Article objects
+    - serializer_class: Serializer object to convert queryset to JSON
+
+    Usage:
+    - GET request to /articles/<int:article_id>/ to retrieve a specific article
+
+    Methods:
+    - get: Retrieve a specific article and return it as a response
+    '''   
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
 
 class ArticleListAPIView(generics.ListAPIView):     #Showed on /articles/
+    '''
+    List all articles.
+
+    Attributes:
+    - queryset: Queryset of all Article objects
+    - serializer_class: Serializer object to convert queryset to JSON
+
+    Usage:
+    - GET request to /articles/ to retrieve all articles
+
+    Methods:
+    - get: Retrieve all articles and return them as a response    
+    '''
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     
 
 class ContinentListAPIView(APIView):  #Showed on startpage
+    '''
+    List all continents with their respective articles.
+    
+    Attributes:
+    - continents: Queryset of all Continent objects
+    - serializer: Serializer object to convert queryset to JSON
+
+    Usage:
+    - GET request to /continents/ to retrieve all continents
+
+    Methods:
+    - get: Retrieve all continents and return them as a response
+    '''
     def get(self, request):
         continents = Continent.objects.all()
         serializer = ContinentSerializer(continents, many=True)
@@ -29,12 +68,40 @@ class ContinentListAPIView(APIView):  #Showed on startpage
     
     
 class ContinentDetailAPIView(RetrieveAPIView): #Showed on /continents/<int:continent_id>/  Specific data for continent articles
+    '''
+    Retrieve a specific continent with its articles.
+
+    Attributes:
+    - queryset: Queryset of all Continent objects
+    - serializer_class: Serializer object to convert queryset to JSON
+    - lookup_field: Field to use for filtering the queryset
+
+    Usage:
+    - GET request to /continents/<int:continent_id>/ to retrieve a specific continent
+
+    Methods:
+    - get: Retrieve a specific continent and return it as a response
+    '''
     queryset = Continent.objects.all()
     serializer_class = ContinentSerializer
     lookup_field = 'continent_id'  # Ensure this field matches the primary key field in your Continent model
 
 
 class CountryListAPIView(APIView): #Showed as lists on continent articles
+    '''
+    List all countries with their respective articles.
+
+    Attributes:
+    - countries: Queryset of all Country objects
+    - serializer: Serializer object to convert queryset to JSON
+
+    Usage:
+    - GET request to /countries/ to retrieve all countries
+
+    Methods:
+    - get: Retrieve all countries and return them as a response
+    '''
+
     def get(self, request):
         countries = Country.objects.all()  # Retrieve all countries from the database
         serializer = CountrySerializer(countries, many=True)  # Serialize the queryset
@@ -42,12 +109,39 @@ class CountryListAPIView(APIView): #Showed as lists on continent articles
 
 
 class CountryDetailAPIView(RetrieveAPIView): #Showed on /countries/<int:country_id>/  Specific data for country articles
+    '''
+    Retrieve a specific country with its articles.
+
+    Attributes:
+    - queryset: Queryset of all Country objects
+    - serializer_class: Serializer object to convert queryset to JSON
+    - lookup_field: Field to use for filtering the queryset
+
+    Usage:
+    - GET request to /countries/<int:country_id>/ to retrieve a specific country
+
+    Methods:
+    - get: Retrieve a specific country and return it as a response    
+    '''
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
     lookup_field = 'country_id'
 
 
 class RegionListAPIView(APIView): #Showed as lists on country articles
+    '''
+    List all regions with their respective articles.
+
+    Attributes:
+    - regions: Queryset of all Region objects
+    - serializer: Serializer object to convert queryset to JSON
+
+    Usage:
+    - GET request to /regions/ to retrieve all regions
+
+    Methods:
+    - get: Retrieve all regions and return them as a response    
+    '''
     def get(self, request):
         regions = Region.objects.all()  # Retrieve all regions from the database
         serializer = RegionSerializer(regions, many=True)  # Serialize the queryset
@@ -55,12 +149,39 @@ class RegionListAPIView(APIView): #Showed as lists on country articles
 
 
 class RegionDetailAPIView(RetrieveAPIView): #Showed on /regions/<int:region_id>/  Specific data for region articles
+    '''
+    Retrieve a specific region with its articles.
+
+    Attributes:
+    - queryset: Queryset of all Region objects
+    - serializer_class: Serializer object to convert queryset to JSON
+    - lookup_field: Field to use for filtering the queryset
+
+    Usage:
+    - GET request to /regions/<int:region_id>/ to retrieve a specific region
+
+    Methods:
+    - get: Retrieve a specific region and return it as a response    
+    '''
     queryset = Region.objects.all()
     serializer_class = RegionSerializer
     lookup_field = 'region_id'
 
 
 class CityListAPIView(APIView): #Showed as lists on region articles
+    '''
+    List all cities with their respective articles.
+
+    Attributes:
+    - cities: Queryset of all City objects
+    - serializer: Serializer object to convert queryset to JSON
+
+    Usage:
+    - GET request to /cities/ to retrieve all cities
+
+    Methods:
+    - get: Retrieve all cities and return them as a response
+    '''
     def get(self, request):
         cities = City.objects.all()  # Retrieve all cities from the database
         serializer = CitySerializer(cities, many=True)  # Serialize the queryset
@@ -68,19 +189,60 @@ class CityListAPIView(APIView): #Showed as lists on region articles
     
 
 class CityDetailAPIView(RetrieveAPIView):  #Showed on /cities/<int:city_id>/  Specific data for city articles
+    '''
+    Retrieve a specific city with its articles.
+
+    Attributes:
+    - queryset: Queryset of all City objects
+    - serializer_class: Serializer object to convert queryset to JSON
+    - lookup_field: Field to use for filtering the queryset
+
+    Usage:
+    - GET request to /cities/<int:city_id>/ to retrieve a specific city
+
+    Methods:
+    - get: Retrieve a specific city and return it as a response
+    '''
     queryset = City.objects.all()
     serializer_class = CitySerializer
     lookup_field = 'city_id'  # Ensure this field matches the primary key field in your City model
 
 
 class PointOfInterestListAPIView(APIView): #Showed as lists on city articles
+    '''
+    List all points of interest.
+
+    Attributes:
+    - points_of_interest: Queryset of all PointOfInterest objects
+    - serializer: Serializer object to convert queryset to JSON
+
+    Usage:
+    - GET request to /points_of_interest/ to retrieve all points of interest
+
+    Methods:
+    - get: Retrieve all points of interest and return them as a response    
+    '''
     def get(self, request):
         points_of_interest = PointOfInterest.objects.all()  # Retrieve all POIs from the database
         serializer = PointOfInterestSerializer(points_of_interest, many=True)  # Serialize the queryset
         return Response(serializer.data)  # Return serialized data as a response
     
 
-class PointOfInterestDetailAPIView(RetrieveAPIView): 
+class PointOfInterestDetailAPIView(RetrieveAPIView):
+    '''
+    Retrieve a specific point of interest with its articles.
+
+    Attributes:
+    - queryset: Queryset of all PointOfInterest objects
+    - serializer_class: Serializer object to convert queryset to JSON
+    - lookup_field: Field to use for filtering the queryset
+
+    Usage:
+    - GET request to /points_of_interest/<int:poi_id>/ to retrieve a specific point of interest
+
+    Methods:
+    - get: Retrieve a specific point of interest and return it as a response
+    ''' 
     queryset = PointOfInterest.objects.all()
     serializer_class = PointOfInterestSerializer
     lookup_field = 'poi_id'  # Ensure this field matches the primary key field in your PointOfInterest model

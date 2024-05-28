@@ -2,10 +2,17 @@
 from rest_framework import serializers
 from .models import *
 
+class PlacedImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PlacedImage
+        fields = ['image_url']
+
 class ArticleSerializer(serializers.ModelSerializer):
+    images = PlacedImageSerializer(many=True, read_only=True)
+
     class Meta:
         model = Article
-        fields = ['article_id', 'under_title', 'content']
+        fields = ['article_id', 'under_title', 'content', 'images']
         
 class PointOfInterestSerializer(serializers.ModelSerializer):
     articles = ArticleSerializer(many=True, source='article_set', read_only=True)
@@ -42,6 +49,11 @@ class CountrySerializer(serializers.ModelSerializer):
 class ContinentSerializer(serializers.ModelSerializer):
     countries = CountrySerializer(many=True, read_only=True)
     articles = ArticleSerializer(many=True, source='article_set', read_only=True)
+    image_url = serializers.SerializerMethodField()
+
     class Meta:
         model = Continent
-        fields = ['continent_id', 'continent_name', 'countries', 'articles']
+        fields = ['continent_id', 'continent_name', 'countries', 'articles', 'image_url']
+
+    def get_image_url(self, obj):
+        return obj.get_image_url()

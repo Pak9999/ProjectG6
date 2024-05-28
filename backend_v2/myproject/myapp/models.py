@@ -12,6 +12,14 @@ class Continent(models.Model):
     
     def __str__(self):
         return self.continent_name
+    
+    def get_image_url(self):
+        # Assuming 'article_set' is the related name from Article to Continent
+        articles = self.article_set.all()
+        for article in articles:
+            if article.images.exists():  # assuming 'images' is the related name from Article to PlacedImage
+                return article.images.first().image_url.url  # Return the URL of the first image found
+        return None  # return a default image URL or None
 
 class Country(models.Model):
     country_id = models.AutoField(primary_key=True)
@@ -97,6 +105,8 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.tag_name
+    
+
 
 class Article(models.Model):
     article_id = models.AutoField(primary_key=True)
@@ -108,6 +118,7 @@ class Article(models.Model):
     city = models.ForeignKey(City, on_delete=models.SET_NULL, blank=True, null=True)
     poi = models.ForeignKey(PointOfInterest, on_delete=models.SET_NULL, blank=True, null=True)
     tag = models.ManyToManyField(Tag)
+
 
     class Meta:
         managed = False
@@ -125,6 +136,21 @@ class Article(models.Model):
 
     def __str__(self):
         return f"{self.under_title}: {self.content[:50]}..."  # Display the title and part of the content
+    
+
+class PlacedImage(models.Model):
+    image_id = models.AutoField(primary_key=True)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='images')
+    image_url = models.ImageField(upload_to='images/', null=True, blank=True)
+
+    class Meta:
+        managed = False
+        db_table = 'placed_img'
+        verbose_name = 'Placed Image'
+        verbose_name_plural = 'Placed Images'
+
+    def __str__(self):
+        return f"Image for Article {self.article.article_id}"
 
 #getting the ids of the geographical levels based on the parent id
 

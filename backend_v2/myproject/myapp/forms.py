@@ -1,6 +1,6 @@
 from django import forms
 from django.db import transaction
-from .models import Article, Continent, Country, Region, City, PointOfInterest
+from .models import Article, Continent, Country, Region, City, PointOfInterest, PlacedImage
 
 class ArticleForm(forms.ModelForm):
     POI_PARENT_CHOICES = [
@@ -8,31 +8,30 @@ class ArticleForm(forms.ModelForm):
         ('region', 'Region'),
         ('city', 'City')
     ]
-    # Add a hidden field for parent_id
     parent_id = forms.IntegerField(required=False, widget=forms.HiddenInput())
-    
     chosen_continent = forms.ModelChoiceField(queryset=Continent.objects.all(), label="Vald Kontinent", empty_label="Välj Kontinent", required=False)
     chosen_country = forms.ModelChoiceField(queryset=Country.objects.all(), label="Vald Land", empty_label= "-", required=False)
     chosen_region = forms.ModelChoiceField(queryset=Region.objects.all(), label="Vald Region", empty_label= "-", required=False)
     chosen_city = forms.ModelChoiceField(queryset=City.objects.all(), label="Vald Stad", empty_label= "-", required=False)
+    image = forms.ImageField(required=False, label="Image")  # Add image field
 
     class Meta:
         model = Article
-        fields = ['chosen_continent', 'chosen_country', 'chosen_region', 'chosen_city', 'chosen_poi']
-        
+        fields = ['chosen_continent', 'chosen_country', 'chosen_region', 'chosen_city', 'chosen_poi', 'image']
+
     place_name = forms.CharField(required=False, label="Platsnamn")
     population = forms.IntegerField(required=False, label="Befolkningsantal")
     land_area = forms.IntegerField(required=False, label="Yta i km2")
     climate = forms.CharField(required=False, label="Klimat")
     poi_parent_type = forms.ChoiceField(choices=[
-        ('', '--- För sevärdhet ---'),   #TODO CHECK RELEVANCY TO POI_PARENT_CHOICE
+        ('', '--- För sevärdhet ---'),
         ('region', 'Region'),
         ('city', 'Stad')
     ], required=False, label="POI Parent Type")
 
     class Meta:
         model = Article
-        fields = ['place_name', 'under_title', 'content', 'population', 'land_area', 'climate', 'poi_parent_type']
+        fields = ['place_name', 'under_title', 'content', 'population', 'land_area', 'climate', 'poi_parent_type', 'image']
 
     def __init__(self, *args, **kwargs):
         super(ArticleForm, self).__init__(*args, **kwargs)
@@ -51,7 +50,7 @@ class ArticleForm(forms.ModelForm):
         self.fields['poi_parent_type'].widget.attrs['placeholder'] = "För sevärdhet"
 
         # Preserve custom field order
-        field_order = ['place_name', 'under_title', 'content', 'geographical_level', 'population', 'land_area', 'climate', 'poi_parent_type']
+        field_order = ['place_name', 'under_title', 'content', 'geographical_level', 'population', 'land_area', 'climate', 'poi_parent_type', 'image']
         self.order_fields(field_order)
         
         if 'chosen_country' in self.data:
@@ -195,15 +194,15 @@ class ArticleForm(forms.ModelForm):
                 country.save()  # Save the country with updated population and land area
                 instance.country = country
                 instance.parent_id = chosen_continent.pk  # Set the parent_id to the continent's primary key
+
+            instance.save()  # Save the Article instance to the database
+
+            # Save many-to-many data if applicable
+            self.save_m2m()
             
-            elif commit:
-                instance.save()  # Now save the Article instance to the database
-                self.save_m2m()  # Save many-to-many data if applicable
+            # Handle the image
+            if self.cleaned_data.get('image'):
+                image = self.cleaned_data['image']
+                PlacedImage.objects.create(article=instance, image_url=image)
+
         return instance
-
-
-
-
-
-
-

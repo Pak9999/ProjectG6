@@ -2,7 +2,8 @@ from django.urls import path
 from . import views
 from .views import *
 from . import views
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -41,6 +42,6 @@ urlpatterns = [
     path('ajax/get_country_id_for_continent/', views.get_country_id_for_continent, name='get_country_id_for_continent'),
     path('ajax/get_region_id_for_country/', views.get_region_id_for_country, name='get_region_id_for_country'),
     path('ajax/get_city_id_for_region/', views.get_city_id_for_region, name='get_city_id_for_region'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
