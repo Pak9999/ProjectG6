@@ -72,9 +72,9 @@ function CountryArticleSection() {
                         <Link to={`/${level.type}/${level.id}`}>{level.name}</Link>
                     </p>
                 ))}
-                <h2>Information</h2>
+                <h3>Information</h3>
                 <p>Here are some facts...</p>
-                <h2>Regions</h2>
+                <h3>Regions</h3>
                 <ul>
                     {country.regions.map((region) => (
                         <li key={region.region_id}>

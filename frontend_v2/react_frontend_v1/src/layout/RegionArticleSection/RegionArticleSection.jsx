@@ -75,9 +75,9 @@ function RegionArticleSection() {
                         <Link to={`/${level.type}/${level.id}`}>{level.name}</Link>
                     </p>
                 ))}
-                <h2>Information</h2>
+                <h3>Information</h3>
                 <p>Here are some facts...</p>
-                <h2>Cities</h2>
+                <h3>Cities</h3>
                 <ul>
                     {region.cities.map((city) => (
                         <li key={city.city_id}>
@@ -85,7 +85,7 @@ function RegionArticleSection() {
                         </li>
                     ))}
                 </ul>
-                <h2>Places</h2>
+                <h3>Sights</h3>
                 <ul>
                     {region.pois_region.map((poi) => (
                         <li key={poi.poi_id}>

@@ -1,14 +1,9 @@
 import bgvid from '../../assets/images/bgvid.mp4';
-import Button from '../../components/Button/Button';
+import arrow from '../../assets/symbols/white-down-arrow-png-2.png';
 import './Header.css'
 
 function Header() {
-    const navigateToDestinations = () => {
-        const element = document.getElementById('pop-destinations');
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
+
 
     return (
         <>
@@ -18,7 +13,15 @@ function Header() {
                     <div className="header-title">
                         <h1>AWAY</h1>
                         <p>Plan your trip with us to find the perfect vacation for you!</p>
-                        <Button className="header-button" onClick={navigateToDestinations}>Explore Popular Destinations</Button>
+
+
+
+                    </div>
+                    <div className='scroll-down-box'>
+                        <h5>Scroll down to start exploring destinations</h5>
+                        <div className='arrow_down'>
+                            <img className='arrow_down' src={arrow} alt="white arrow down" />
+                        </div>
                     </div>
                 </div>
             </div>

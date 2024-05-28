@@ -20,7 +20,11 @@ function TestNavbar() {
                 <Link to="/">
                     <img src={logo} className="test-navbar-logo" alt="Logo" />
                 </Link>
-                <h1 className="test-navbar-text">Away</h1>
+                <Link to="/">
+                    <h1 className="test-navbar-text">Away</h1>                    
+                </Link>
+                
+                
             </div>
             <div className={`menu-icon ${showMobileMenu ? 'active' : ''}`} onClick={() => setShowMobileMenu(!showMobileMenu)}>
                 {showMobileMenu ? 'X' : '☰'}
@@ -31,17 +35,11 @@ function TestNavbar() {
                     <Link to="/" className='test-nav-links'>Home</Link>
                 </li>
                 <li className="test-nav-item">
-                    <img src={paperplane} alt="" style={{ width: '30px', padding: '5px 5px 6px 5px', }} />
-                    <Link to="/article-template" className='test-nav-links'>Destinations</Link>
-                </li>
-                <li className="test-nav-item">
                     <img src={questionmark} alt="" style={{ width: '30px', padding: '5px 5px 6px 5px', }} />
                     <Link to="/About" className='test-nav-links'>About</Link>
                 </li>
 
-                <li className="test-nav-item">
-                    <Button className="signin-button">Sign In</Button>
-                </li>
+                
             </ul>
 
         </nav>

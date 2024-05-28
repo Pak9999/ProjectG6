@@ -53,9 +53,11 @@ function ArticleSection() {
             </section>
 
             <aside className='article-aside'>
-                <h2>Information</h2>
+                <h2>Navigation</h2>
+                <a href="/">Back to home page</a>
+                <h3>Information</h3>
                 <p>Here are some facts...</p>
-                <h2>Countries</h2>
+                <h3>Countries</h3>
                 <ul>
                     {continent.countries.map((country) => (
                         <li key={country.country_id}>
