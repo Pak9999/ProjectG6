@@ -15,40 +15,36 @@ from rest_framework.generics import ListAPIView
 from .models import Article, Country, Region, City, PointOfInterest
 from .serializers import ArticleSerializer
 
-class ArticleSearchAPIView(generics.ListAPIView):
-    serializer_class = ArticleSerializer
-    permission_classes = [AllowAny]
+class ContinentSearchAPIView(generics.ListAPIView):
+    serializer_class = ContinentSerializer  
+    permission_classes = [AllowAny] 
 
     def get_queryset(self):
         query = self.request.query_params.get('q', None)
         if query:
-            return Article.objects.filter(content__icontains=query)
-        return Article.objects.none()
+            return Continent.objects.filter(continent_name__icontains=query)
+        return Continent.objects.none()
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
-    
-def search_view(request):
-    query = request.GET.get('q')
-    articles = Article.objects.filter(
-        Q(under_title__icontains=query) |
-        Q(content__icontains=query)
-    ) if query else None
-    return render(request, 'myapp/search_results.html', {'articles': articles, 'query': query})
 
+def continent_search_view(request):
+    query = request.GET.get('q')
+    continents = Continent.objects.filter(continent_name__icontains=query) if query else None
+    return render(request, 'myapp/search_results.html', {'continents': continents, 'query': query})
 
 class ArticleDetailAPIView(generics.RetrieveAPIView):   
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
 
-class ArticleListAPIView(generics.ListAPIView):     #Showed on /articles/
+class ArticleListAPIView(generics.ListAPIView):  
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     
 
-class ContinentListAPIView(APIView):  #Showed on startpage
+class ContinentListAPIView(APIView):  
     def get(self, request):
         continents = Continent.objects.all()
         serializer = ContinentSerializer(continents, many=True)
