@@ -115,7 +115,7 @@ function PoiArticleSection() {
                         </Link>
                     </p>
                 ))}
-                <h2>Information</h2>
+                <h3>Information</h3>
                 <p>Here are some facts...</p>
             </aside>
         </main>
