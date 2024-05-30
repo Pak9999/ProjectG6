@@ -38,12 +38,22 @@ function SearchResultSection() {
             {loading && <p>Loading...</p>}
             {error && <p className="error">{error}</p>}
             <ul>
-                {continents.map((continent, index) => (
-                    <li key={index} className="continent-item">
+                {continents.map((continent) => (
+                    <li key={continent.continent_id} className="continent-item">
                         <Link to={`/continent/${continent.continent_id}`}>
                             <h2>{continent.continent_name}</h2>
                             <p>Continent ID: {continent.continent_id}</p>
                         </Link>
+                        <ul>
+                            {continent.countries.filter((country) => country.country_name.toLowerCase().includes(query.toLowerCase())).map((country) => (
+                                <li key={country.country_id} className="country-item">
+                                    <Link to={`/country/${country.country_id}`}>
+                                        <h2>{country.country_name}</h2>
+                                        <p>Country ID: {country.country_id}</p>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
                     </li>
                 ))}
             </ul>
