@@ -12,8 +12,8 @@ from django.db.models import Q
 from rest_framework.generics import ListAPIView
 
 class ContinentSearchAPIView(generics.ListAPIView):
-    serializer_class = ContinentSerializer  
-    permission_classes = [AllowAny] 
+    serializer_class = ContinentSerializer
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         query = self.request.query_params.get('q', None)
@@ -21,39 +21,59 @@ class ContinentSearchAPIView(generics.ListAPIView):
             # Filter continents based on the query
             continents = Continent.objects.filter(
                 Q(continent_name__icontains=query) |
-                Q(countries__country_name__icontains=query)
+                Q(countries__country_name__icontains=query) |
+                Q(countries__regions__region_name__icontains=query)
             ).distinct()
             return continents
         return Continent.objects.none()
 
-def list(self, request, *args, **kwargs):
-    queryset = self.get_queryset()
-    data = []
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        data = []
 
-    for continent in queryset:
-        continent_data = {
-            'continent_id': continent.continent_id,
-            'continent_name': continent.continent_name,
-            'countries': []
-        }
-        filtered_countries = continent.countries.filter(country_name__icontains=request.query_params.get('q', ''))
-        for country in filtered_countries:
-            country_data = {
-                'country_id': country.id,
-                'country_name': country.country_name,
-                'population': country.population,
-                'land_area': country.land_area,
+        for continent in queryset:
+            continent_data = {
+                'continent_id': continent.continent_id,
+                'continent_name': continent.continent_name,
+                'countries': []
             }
-            continent_data['countries'].append(country_data)
-        data.append(continent_data)
+            filtered_countries = continent.countries.filter(
+                Q(country_name__icontains=request.query_params.get('q', '')) |
+                Q(regions__region_name__icontains=request.query_params.get('q', ''))
+            ).distinct()
+            for country in filtered_countries:
+                country_data = {
+                    'country_id': country.country_id,
+                    'country_name': country.country_name,
+                    'population': country.population,
+                    'land_area': country.land_area,
+                    'regions': []
+                }
+                regions = country.regions.filter(region_name__icontains=request.query_params.get('q', ''))
+                for region in regions:
+                    region_data = {
+                        'region_id': region.region_id,
+                        'region_name': region.region_name,
+                        'climate': region.climate,
+                    }
+                    country_data['regions'].append(region_data)
+                continent_data['countries'].append(country_data)
+            data.append(continent_data)
 
-    return Response(data)
+        return Response(data)
+
+
+
+
 
 
 def continent_search_view(request):
     query = request.GET.get('q')
     continents = Continent.objects.filter(continent_name__icontains=query) if query else None
     return render(request, 'myapp/search_results.html', {'continents': continents, 'query': query})
+
+
+
 
 class ArticleDetailAPIView(generics.RetrieveAPIView):   
     queryset = Article.objects.all()
