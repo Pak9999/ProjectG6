@@ -55,6 +55,7 @@ class ContinentSearchAPIView(generics.ListAPIView):
                         'region_id': region.region_id,
                         'region_name': region.region_name,
                         'climate': region.climate,
+                        # You can add more fields if needed
                     }
                     country_data['regions'].append(region_data)
                 continent_data['countries'].append(country_data)
@@ -71,9 +72,6 @@ def continent_search_view(request):
     query = request.GET.get('q')
     continents = Continent.objects.filter(continent_name__icontains=query) if query else None
     return render(request, 'myapp/search_results.html', {'continents': continents, 'query': query})
-
-
-
 
 class ArticleDetailAPIView(generics.RetrieveAPIView):   
     queryset = Article.objects.all()
@@ -349,3 +347,14 @@ def get_city_id_for_region(request):
     region_id = request.GET.get('region_id')
     city_id = get_city_id_based_on_region(region_id)
     return JsonResponse({'city_id': city_id})
+
+def get_regions_for_country(request):
+    country_id = request.GET.get('country_id')
+    regions = Region.objects.filter(country_id=country_id).values('region_id', 'region_name')
+    return JsonResponse(list(regions), safe=False)
+
+def get_cities_for_region(request):
+    region_id = request.GET.get('region_id')
+    cities = City.objects.filter(region_id=region_id).values('city_id', 'city_name')
+    return JsonResponse(list(cities), safe=False)
+
