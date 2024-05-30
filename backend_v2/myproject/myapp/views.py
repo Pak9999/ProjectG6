@@ -15,6 +15,8 @@ from rest_framework.generics import ListAPIView
 class ContinentSearchAPIView(generics.ListAPIView):
     serializer_class = ContinentSerializer
     permission_classes = [AllowAny]
+    serializer_class = ContinentSerializer
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         query = self.request.query_params.get('q', None)

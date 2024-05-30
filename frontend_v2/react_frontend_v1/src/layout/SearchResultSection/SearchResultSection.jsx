@@ -5,6 +5,7 @@ import './SearchResultSection.css'; // Assuming you have a CSS file for styling
 
 function SearchResultSection() {
     const [searchResults, setSearchResults] = useState([]);
+    const [searchResults, setSearchResults] = useState([]);
     const [query, setQuery] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -15,17 +16,22 @@ function SearchResultSection() {
         if (queryParam) {
             setQuery(queryParam);
             fetchSearchResults(queryParam);
+            fetchSearchResults(queryParam);
         } else {
             setLoading(false);
         }
     }, []);
 
     const fetchSearchResults = async (query) => {
+    const fetchSearchResults = async (query) => {
         try {
             const response = await axios.get(`http://localhost:8000/api/continents/search?q=${query}`);
             setSearchResults(response.data);
+            setSearchResults(response.data);
             setLoading(false);
         } catch (error) {
+            console.error('Error fetching search results:', error.message);
+            setError('Failed to fetch search results. Please try again later.');
             console.error('Error fetching search results:', error.message);
             setError('Failed to fetch search results. Please try again later.');
             setLoading(false);
@@ -33,6 +39,7 @@ function SearchResultSection() {
     };
 
     return (
+        <main className="search-result-main">
         <main className="search-result-main">
             <h1>Search Results for: {query}</h1>
             {loading && <p>Loading...</p>}
