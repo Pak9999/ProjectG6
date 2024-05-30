@@ -1,6 +1,4 @@
 from django.shortcuts import render
-from .models import Continent, Country, Article, Region, City, PointOfInterest
-
 from django.db import connection
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
@@ -12,23 +10,82 @@ from rest_framework.generics import RetrieveAPIView
 from rest_framework.permissions import AllowAny
 from django.db.models import Q
 from rest_framework.generics import ListAPIView
-from .models import Article, Country, Region, City, PointOfInterest
-from .serializers import ArticleSerializer
+
 
 class ContinentSearchAPIView(generics.ListAPIView):
-    serializer_class = ContinentSerializer  
-    permission_classes = [AllowAny] 
+    serializer_class = ContinentSerializer
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         query = self.request.query_params.get('q', None)
         if query:
-            return Continent.objects.filter(continent_name__icontains=query)
+            # Filter continents based on the query
+            continents = Continent.objects.filter(
+                Q(continent_name__icontains=query) |
+                Q(countries__country_name__icontains=query) |
+                Q(countries__regions__region_name__icontains=query) |
+                Q(countries__regions__cities__city_name__icontains=query) |
+                Q(countries__regions__cities__pois_city__poi_name__icontains=query) |
+                Q(countries__regions__pois_region__poi_name__icontains=query)
+            ).distinct()
+            return continents
         return Continent.objects.none()
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+        data = []
+        query = request.query_params.get('q', '')
+
+        for continent in queryset:
+            continent_data = {
+                'continent_id': continent.continent_id,
+                'continent_name': continent.continent_name,
+                'countries': []
+            }
+            for country in continent.countries.all():
+                country_data = {
+                    'country_id': country.country_id,
+                    'country_name': country.country_name,
+                    'regions': []
+                }
+                for region in country.regions.all():
+                    region_data = {
+                        'region_id': region.region_id,
+                        'region_name': region.region_name,
+                        'cities': [],
+                        'pois_region': []
+                    }
+                    for city in region.cities.all():
+                        city_data = {
+                            'city_id': city.city_id,
+                            'city_name': city.city_name,
+                            'pois_city': []
+                        }
+                        for poi in city.pois_city.filter(poi_name__icontains=query):
+                            poi_data = {
+                                'poi_id': poi.poi_id,
+                                'poi_name': poi.poi_name,
+                                'articles': [{'article_id': article.article_id, 'under_title': article.under_title, 'content': article.content} for article in poi.article_set.all()]  # Convert Article instances to dictionaries
+                            }
+                            city_data['pois_city'].append(poi_data)
+                        if city_data['pois_city'] or city.city_name.lower().find(query.lower()) != -1:  # Check if city name or POI matches the query
+                            region_data['cities'].append(city_data)
+                    for poi in region.pois_region.filter(poi_name__icontains=query):
+                        poi_data = {
+                            'poi_id': poi.poi_id,
+                            'poi_name': poi.poi_name,
+                            'articles': [{'article_id': article.article_id, 'under_title': article.under_title, 'content': article.content} for article in poi.article_set.all()]  # Convert Article instances to dictionaries
+                        }
+                        region_data['pois_region'].append(poi_data)
+                    if region_data['cities'] or region_data['pois_region'] or region.region_name.lower().find(query.lower()) != -1:  # Check if region name or POI matches the query
+                        country_data['regions'].append(region_data)
+                if country_data['regions'] or country.country_name.lower().find(query.lower()) != -1:  # Check if country name matches the query
+                    continent_data['countries'].append(country_data)
+            if continent_data['countries'] or continent.continent_name.lower().find(query.lower()) != -1:  # Check if continent name matches the query
+                data.append(continent_data)
+        return Response(data)
+
+
 
 def continent_search_view(request):
     query = request.GET.get('q')
@@ -309,3 +366,20 @@ def get_city_id_for_region(request):
     region_id = request.GET.get('region_id')
     city_id = get_city_id_based_on_region(region_id)
     return JsonResponse({'city_id': city_id})
+
+# This function handles the search functionality for continents
+
+""" def get_regions_for_country(request):
+    country_id = request.GET.get('country_id')
+    regions = Region.objects.filter(country_id=country_id).values('region_id', 'region_name')
+    return JsonResponse(list(regions), safe=False)
+
+def get_cities_for_region(request):
+    region_id = request.GET.get('region_id')
+    cities = City.objects.filter(region_id=region_id).values('city_id', 'city_name')
+    return JsonResponse(list(cities), safe=False)
+
+def get_pois_for_city(request):
+    city_id = request.GET.get('city_id')
+    pois = PointOfInterest.objects.filter(city_id=city_id).values('poi_id', 'poi_name')
+    return JsonResponse(list(pois), safe=False) """
