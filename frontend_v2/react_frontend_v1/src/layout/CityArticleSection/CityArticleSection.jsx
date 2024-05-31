@@ -78,9 +78,9 @@ function CityArticleSection() {
                         <Link to={`/${level.type}/${level.id}`}>{level.name}</Link>
                     </p>
                 ))}
-                <h2>Information</h2>
-                <p>Här är info</p>
-                <h2>Places</h2>
+                <h3>Information</h3>
+                <p>Here are some facts...</p>
+                <h3>Sights</h3>
                 <ul>
                     {city.pois_city.map((poi) => (
                         <li key={poi.poi_id}>

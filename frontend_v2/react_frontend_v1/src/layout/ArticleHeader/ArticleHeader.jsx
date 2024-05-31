@@ -45,8 +45,8 @@ function ArticleHeader() {
                         <div className="article-header-title">
                             <h1>{continent.continent_name}</h1>
                             <p>{article.under_title}</p>
-{/*                             <Button className="article-header-button" onClick={navigateToArticleSection}>Read More</Button>
- */}                        </div>
+                            
+                        </div>
                     </div>
                 </div>
             ))}

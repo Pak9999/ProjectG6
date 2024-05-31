@@ -1,0 +1,21 @@
+
+
+
+.about-container {
+    background-color: #dbdbdb;
+    height: 78vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    padding: 130px;
+    
+}
+
+.about-container p {
+    padding-top: 30px;
+}
+
+.name-list {
+    font-weight: bold;
+}

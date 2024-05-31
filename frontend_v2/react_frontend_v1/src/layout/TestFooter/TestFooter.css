@@ -99,6 +99,10 @@
     font-size: 24px;
   }
 
+  .social-icon-link img {
+    width: 55px;
+    height: 55px;
+  }
 
   /* DENNA ÄR FUCKED UP; KONTROLLERA (INSPEKTERAREN SPECIELLT*/
     
@@ -137,8 +141,7 @@
   .social-icons {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    width: 240px;
+    align-items: right;
   }
   
   .social-logo {
