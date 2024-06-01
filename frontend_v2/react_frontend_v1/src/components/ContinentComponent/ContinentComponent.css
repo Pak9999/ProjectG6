@@ -50,10 +50,7 @@
 
 
 .slider-cont {
-
     margin-bottom: 100px;
-
-
 }
 
 
@@ -63,9 +60,6 @@
     transition: all 0.3s cubic-bezier(0.445,0.05,0.55,0.95);
     transition: transform .2s ease-in-out;
     border-radius: 5px;
-
-
-
 }
 
 .col-content:hover {
@@ -74,7 +68,7 @@
 
 
 .col-content img {
-    width: 15vw;
+    width: 90%;
     height: 40vh;
     object-fit: cover;
     border-radius: 10px;

@@ -34,7 +34,7 @@ const ContinentComponent = () => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
           dots: true,
           centerPadding: '20px', // Adjust padding for mobile screens

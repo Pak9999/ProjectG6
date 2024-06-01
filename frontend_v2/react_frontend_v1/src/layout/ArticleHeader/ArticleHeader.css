@@ -18,12 +18,6 @@
     pointer-events: none;
     background-size: cover;
     
-    
-    /* Lägg till i mobilanpassning för att bilden ska följa med på rätt sätt 
-    background-size: contain;
-    background-repeat: no-repeat;
-    */
-    
 }
 
 .article-header-content {
@@ -74,7 +68,7 @@
 .article-header-title {
     text-decoration: none;
     font-size: 4vh;
-    color: rgb(255, 255, 255); /* BYTER FÄRG PÅ TEXTEN I TITLEN (ITALY) */
+    color: rgb(255, 255, 255);
     margin-left: auto;
     margin-right: auto;
     text-align: center;
