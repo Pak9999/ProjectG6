@@ -4,6 +4,12 @@ import TestFooter from './layout/TestFooter/TestFooter';
 import AboutContent from './layout/AboutContent/AboutContent';
 import './About.css';
 
+/**
+ * Renders the About component.
+ * 
+ * @returns {JSX.Element} The rendered About component.
+ */
+
 
 function About() {
     return (

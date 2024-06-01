@@ -2,7 +2,13 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import exampleImage from '../../assets/images/italyarticleheader.png';
-import './ArticleHeader.css';
+import '../ArticleHeader/ArticleHeader.css';
+
+/**
+ * Renders the PoiArticleHeader component for POI.
+ * 
+ * @returns {JSX.Element} The rendered PoiArticleHeader component.
+ */
 
 function PoiArticleHeader() {
     const [poi, setPoi] = useState(null);

@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
+
 import '../ArticleSection/ArticleSection.css';
+
+
+// This component is used to display the article section of a city
+
+/**
+ * Renders the CityArticleSection component for CITY.
+ * 
+ * @returns {JSX.Element} The rendered CityArticleSection component.
+ */
 
 function CityArticleSection() {
     const [city, setCity] = useState(null);

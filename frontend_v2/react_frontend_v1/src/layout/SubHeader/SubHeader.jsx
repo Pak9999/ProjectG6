@@ -4,6 +4,12 @@ import { useParams } from 'react-router-dom';
 import './SubHeader.css'
 
 
+/**
+ * Renders the SubHeader component.
+ * 
+ * @returns {JSX.Element} The rendered SubHeader component.
+ */
+
 function SubHeader() {
     const [continent, setContinent] = useState(null);
     const { continentId } = useParams();  // Match the param name used in your route

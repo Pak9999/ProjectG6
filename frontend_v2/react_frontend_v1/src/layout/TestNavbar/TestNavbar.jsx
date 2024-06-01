@@ -1,6 +1,12 @@
 
 /* Denna filen inklusive TestNavbar.css är en den nya uppdaterade versionen av navbaren - Gamla ska tas bort.*/
 
+/**
+ * Renders the TestNavbar component.
+ * 
+ * @returns {JSX.Element} The rendered TestNavbar component.
+ */
+
 import React, { useState } from 'react';
 import './TestNavbar.css';
 import { Link } from 'react-router-dom';
