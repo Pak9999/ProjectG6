@@ -9,7 +9,8 @@ A travel site based on articles which are stored in different levels like Contin
 
 ## Screenshots
 
-![App Screenshot](demo/RESOURCE/firefox_TkKSez9KHu-ezgif.com-optimize(1).gif)
+![App Screenshot](frontend_v2/react_frontend_v1/src/assets/images/firefox_TkKSez9KHu-ezgif.com-optimize(1).gif)
+
 
 ## Run Locally
 
