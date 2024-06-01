@@ -3,12 +3,7 @@
 
 import React from 'react';
 import './TestFooter.css';
-import Button from '../../components/Button/Button';
 import { Link } from 'react-router-dom';
-import facebook from '../../assets/images/facebook.png';
-import instagram from '../../assets/images/instagram.png';
-import youtube from '../../assets/images/youtube.png';
-import twitter from '../../assets/images/twitter.png';
 import github from '../../assets/images/github.png';
 
 function TestFooter() {

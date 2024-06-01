@@ -5,10 +5,6 @@ import React, { useState } from 'react';
 import './TestNavbar.css';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
-import Button from '../../components/Button/Button';
-import homelogo from '../../assets/images/home.png'
-import paperplane from '../../assets/images/paper-plane.png'
-import questionmark from '../../assets/images/question-sign.png'
 
 
 function TestNavbar() {
@@ -31,11 +27,9 @@ function TestNavbar() {
             </div>
             <ul className={showMobileMenu ? 'test-nav-menu active' : 'test-nav-menu'}>
                 <li className="test-nav-item">
-                    <img src={homelogo} alt="" style={{ width: '30px', padding: '5px 5px 6px 5px', }} />
                     <Link to="/" className='test-nav-links'>Home</Link>
                 </li>
                 <li className="test-nav-item">
-                    <img src={questionmark} alt="" style={{ width: '30px', padding: '5px 5px 6px 5px', }} />
                     <Link to="/About" className='test-nav-links'>About</Link>
                 </li>
 

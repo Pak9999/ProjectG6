@@ -41,11 +41,6 @@ create table region_capital (
 	primary key (city_id, region_id)
 );
 
-insert into capital 
-values (3, 8)
-
-select * from capital 
-
 create table point_of_interest (
 	poi_id serial primary key,
 	poi_name varchar (60) not null,
@@ -216,14 +211,13 @@ SELECT insert_article_with_geo_data(
     'Europas högsta aktiva vulkan', -- Under_title
     'Etna, eller ”Muncibeddu” som berget heter på sicilianska, har varit mer eller mindre aktiv i 500 000 år.', -- Content
     'point_of_interest', -- Geographical level
-    NULL, -- Population
-    NULL, -- Land area
-    NULL, -- Climate (region and city)
+    NULL, -- Population for country or city
+    NULL, -- Land area for country
+    NULL, -- Climate for region and city
     10, -- ID of parent
 	'region' -- Geo level of parent (city or region for POI)
 );
 
-select * from point_of_interest 
 
 insert into tag (tag_name)
 values ('Kultur') -- Adding tags
