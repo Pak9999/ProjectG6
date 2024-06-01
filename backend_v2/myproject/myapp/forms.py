@@ -19,7 +19,7 @@ class ArticleForm(forms.ModelForm):
         model = Article
         fields = ['chosen_continent', 'chosen_country', 'chosen_region', 'chosen_city', 'chosen_poi', 'image']
 
-    place_name = forms.CharField(required=False, label="Platsnamn")
+    place_name = forms.CharField(required=False, label="Titel och namn på ny artikel")
     population = forms.IntegerField(required=False, label="Befolkningsantal")
     land_area = forms.IntegerField(required=False, label="Yta i km2")
     climate = forms.CharField(required=False, label="Klimat")
