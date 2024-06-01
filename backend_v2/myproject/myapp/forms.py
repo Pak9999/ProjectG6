@@ -2,7 +2,31 @@ from django import forms
 from django.db import transaction
 from .models import Article, Continent, Country, Region, City, PointOfInterest, PlacedImage
 
+
+
 class ArticleForm(forms.ModelForm):
+    '''
+    Used to create articles. The form includes fields for the Article model and related models (geo level) to be stored in the 
+    database in two different tables, article and geo level ('continent', 'country', 'region', 'city' or 'point of interest').
+
+    Attributes:
+    - parent_id: Hidden input field to store the primary key of the parent model (Continent, Country, Region, City)
+    - chosen_continent: ModelChoiceField to select a continent
+    - chosen_country: ModelChoiceField to select a country
+    - chosen_region: ModelChoiceField to select a region
+    - chosen_city: ModelChoiceField to select a city
+    - image: ImageField to upload an image
+
+    Usage:
+    form = ArticleForm(request.POST, request.FILES)
+    if form.is_valid():
+        form.save()
+
+    Methods:
+    - __init__: Initializes the form with custom field labels, placeholders, and field order
+    - clean: Validates the population and land area fields
+    - save: Saves the Article instance and related models to the database using a single transaction
+    '''
     POI_PARENT_CHOICES = [
         ('', '--- Select Parent Type ---'),
         ('region', 'Region'),
@@ -34,13 +58,18 @@ class ArticleForm(forms.ModelForm):
         fields = ['place_name', 'under_title', 'content', 'population', 'land_area', 'climate', 'poi_parent_type', 'image']
 
     def __init__(self, *args, **kwargs):
+        '''
+        Defines the form fields, labels, placeholders, and field order
+
+        Args:
+        - args: Positional arguments
+        - kwargs: Keyword arguments
+        '''
         super(ArticleForm, self).__init__(*args, **kwargs)
         
-        # Custom labels
         self.fields['under_title'].label = "Underrubrik"
         self.fields['content'].label = "Brödtext"
         
-        # Custom placeholders
         self.fields['place_name'].widget.attrs['placeholder'] = "Ange platsnamn här"
         self.fields['under_title'].widget.attrs['placeholder'] = "Ange en underrubrik här"
         self.fields['content'].widget.attrs['placeholder'] = "Skriv huvudinnehållet här"
@@ -49,7 +78,6 @@ class ArticleForm(forms.ModelForm):
         self.fields['climate'].widget.attrs['placeholder'] = "För region och stad"
         self.fields['poi_parent_type'].widget.attrs['placeholder'] = "För sevärdhet"
 
-        # Preserve custom field order
         field_order = ['place_name', 'under_title', 'content', 'geographical_level', 'population', 'land_area', 'climate', 'poi_parent_type', 'image']
         self.order_fields(field_order)
         
@@ -74,12 +102,18 @@ class ArticleForm(forms.ModelForm):
             self.fields['chosen_city'].queryset = City.objects.none()
 
     def clean(self):
+        '''
+        Validates the population and land area fields and returns cleaned data
+
+        Returns:
+        - cleaned_data: Dictionary containing cleaned data
+        
+        '''
         cleaned_data = super().clean()
         population = cleaned_data.get('population')
         land_area = self.cleaned_data.get('land_area')
         if land_area is not None:
             land_area = int(land_area)
-        # Validate population and land area
         if population is not None:
             try:
                 population = int(population)
@@ -95,7 +129,17 @@ class ArticleForm(forms.ModelForm):
         return cleaned_data
 
     def save(self, commit=True):
-        instance = super().save(commit=False)  # Create the Article instance without committing to the database
+        '''
+        Saves the Article instance and related models to the database using a single transaction
+        include values for both article and related models (geo level)
+
+        Args:
+        - commit: Boolean value to determine whether to commit the instance to the database
+
+        Returns:
+        - instance: Article instance saved to the database
+        '''
+        instance = super().save(commit=False) 
         place_name = self.cleaned_data.get('place_name')
         chosen_continent = self.cleaned_data.get('chosen_continent')
         chosen_country = self.cleaned_data.get('chosen_country')
@@ -109,20 +153,20 @@ class ArticleForm(forms.ModelForm):
         if population is not None:
             population = int(population)
         else:
-            population = 0  # Or any other default value you prefer
+            population = 0 
             
         land_area = self.cleaned_data.get('land_area')
         if land_area is not None:
             try:
                 land_area = int(land_area)
             except ValueError:
-                land_area = 0  # Set default value if land_area cannot be converted to an integer
+                land_area = 0  
         else:
-            land_area = 0  # Set default value if land_area is None
+            land_area = 0  
 
         print(f"population: {population}, land_area: {land_area}")
 
-        with transaction.atomic():  # Ensures all operations are done within a single transaction
+        with transaction.atomic(): 
             
             if chosen_parent_type == 'region' and chosen_region:   
                 poi = PointOfInterest.objects.create(
@@ -148,7 +192,6 @@ class ArticleForm(forms.ModelForm):
             
                 
             elif chosen_region and place_name:
-                # creates a new city if it does not exist
                 city = City.objects.create(
                     city_name=place_name,
                     climate=climate,
@@ -156,15 +199,13 @@ class ArticleForm(forms.ModelForm):
                 )
                 instance.city = city
                 instance.parent_id = chosen_region.pk
-                chosen_city = city  # Update chosen_region for city creation
+                chosen_city = city  
 
-                # Update population if available
                 if population is not None:
                     city.population = population
-                city.save()  # Save the region with updated population
+                city.save()  
                 
             elif chosen_country and place_name:
-                # creates a new region if it does not exist
                 region = Region.objects.create(
                     region_name=place_name,
                     climate=climate,
@@ -172,35 +213,30 @@ class ArticleForm(forms.ModelForm):
                 )
                 instance.region = region
                 instance.parent_id = chosen_country.pk
-                chosen_region = region  # Update chosen_region for city creation
+                chosen_region = region 
 
-                # Update population and land area if available
                 if climate is not None:
                     chosen_region.climate = climate
-                region.save()  # Save the region with updated climate
+                region.save()
                 
                 
             elif chosen_continent:
-                # creates a new country if it does not exist
                 country, created = Country.objects.get_or_create(
                     country_name = place_name,
                     continent = chosen_continent
                 )
-                # Set population and land area if available
                 if population is not None:
                     country.population = population
                 if land_area is not None:
                     country.land_area = land_area
-                country.save()  # Save the country with updated population and land area
+                country.save() 
                 instance.country = country
-                instance.parent_id = chosen_continent.pk  # Set the parent_id to the continent's primary key
+                instance.parent_id = chosen_continent.pk
 
-            instance.save()  # Save the Article instance to the database
+            instance.save()
 
-            # Save many-to-many data if applicable
             self.save_m2m()
             
-            # Handle the image
             if self.cleaned_data.get('image'):
                 image = self.cleaned_data['image']
                 PlacedImage.objects.create(article=instance, image_url=image)
