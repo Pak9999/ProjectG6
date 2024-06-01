@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';  // Ensure this is needed, otherwise remove
-import Button from '../../components/Button/Button';
 import exampleImage from '../../assets/images/italyarticleheader.png';
 import './ArticleHeader.css';
 
+/**
+ * Renders the ArticleHeader component for CONTINENT.
+ *
+ * @returns {JSX.Element} The rendered ArticleHeader component.
+ */
+
 function ArticleHeader() {
-    const navigateToArticleSection = () => {
-        const element = document.getElementById('home');
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
 
     const [continent, setContinent] = useState(null);
     const { continentId } = useParams();

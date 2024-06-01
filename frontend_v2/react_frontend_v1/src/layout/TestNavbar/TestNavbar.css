@@ -86,7 +86,6 @@
       transition: transform 0.3s ease-in-out; /* Add this */
         
     }
-  
 
     .menu-icon.active {
         transform: rotate(180deg);
@@ -101,9 +100,6 @@
       left: 0;
       
       background-color: #333;
-
-      
-
       
     }
   

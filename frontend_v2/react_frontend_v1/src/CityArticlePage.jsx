@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 import TestNavbar from './layout/TestNavbar/TestNavbar.jsx';
-
-import './App.css';
-import TestFooter from './layout/TestFooter/TestFooter.jsx';
 import CityArticleHeader from './layout/CityArticleHeader/CityArticleHeader.jsx';
 import CityArticleSection from './layout/CityArticleSection/CityArticleSection.jsx';
+import TestFooter from './layout/TestFooter/TestFooter.jsx';
+
+import './App.css';
+
+/**
+ * Renders the CityArticlePage component.
+ * 
+ * @returns {JSX.Element} The rendered CityArticlePage component.
+ */
 
 const CityArticlePage = () => {
     const [city, setCity] = useState(null);

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 
-
 import Home from './Home.jsx';
 import ArticleTemplate from './ArticleTemplate.jsx';
 import NotFound from './NotFound.jsx';
@@ -13,11 +12,13 @@ import RegionArticlePage from './RegionArticlePage';  // Make sure this import i
 import CityArticlePage from './CityArticlePage';  // Make sure this import is correct
 import PointOfInterestArticlePage from './PointOfInterestArticlePage';  // Make sure this import is correct
 
-
-
 import ContinentComponent from './components/ContinentComponent/ContinentComponent.jsx';
 
-
+/**
+ * Renders the App component.
+ * 
+ * @returns {JSX.Element} The rendered App component.
+ */
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -43,9 +44,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
 
-        {/* Pass countries data as props to ContinentComponent */}
         <Route path="/" element={<ContinentComponent countries={countries} />} />
-        {/* Add a route for individual continent */}
         <Route path="/continent/:continentId" element={<ContinentArticlePage />} />
 
         <Route path="/country/:countryId" element={<CountryArticlePage />} />

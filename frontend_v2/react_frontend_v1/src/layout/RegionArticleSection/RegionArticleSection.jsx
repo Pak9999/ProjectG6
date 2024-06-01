@@ -3,6 +3,14 @@ import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import '../ArticleSection/ArticleSection.css';
 
+// This component is used to display the article section of a region
+
+/**
+ * Renders the RegionArticleSection component for REGION.
+ * 
+ * @returns {JSX.Element} The rendered RegionArticleSection component.
+ */
+
 function RegionArticleSection() {
     const [region, setRegion] = useState(null);
     const [hierarchy, setHierarchy] = useState([]);

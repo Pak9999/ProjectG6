@@ -1,14 +1,14 @@
 /* Denna filen inklusive TestFooter.css är en den nya uppdaterade versionen av navbaren - Gamla ska tas bort.*/
 
+/** 
+ * Renders the TestFooter component.
+ * 
+ * @returns {JSX.Element} The rendered TestFooter component.
+ */
 
 import React from 'react';
 import './TestFooter.css';
-import Button from '../../components/Button/Button';
 import { Link } from 'react-router-dom';
-import facebook from '../../assets/images/facebook.png';
-import instagram from '../../assets/images/instagram.png';
-import youtube from '../../assets/images/youtube.png';
-import twitter from '../../assets/images/twitter.png';
 import github from '../../assets/images/github.png';
 
 function TestFooter() {
@@ -25,12 +25,12 @@ function TestFooter() {
           <small className='website-rights'>AWAY © 2024</small>
           <div className='social-icons'>
             <Link
-              className='social-icon-link twitter'
+              className='social-icon-link-twitter'
               to='https://github.com/Pak9999/ProjectG6'
               target='_blank'
               aria-label='LinkedIn'
             >
-              <img src={github} alt="Github" />
+              <img className='git-icon' src={github} alt="Github" />
             </Link>
           </div>
         </div>

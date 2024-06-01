@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 import TestNavbar from './layout/TestNavbar/TestNavbar.jsx';
-
-import './App.css';
-import TestFooter from './layout/TestFooter/TestFooter.jsx';
 import RegionArticleHeader from './layout/RegionArticleHeader/RegionArticleHeader.jsx';
 import RegionArticleSection from './layout/RegionArticleSection/RegionArticleSection.jsx';
+import TestFooter from './layout/TestFooter/TestFooter.jsx';
+
+import './App.css';
+
+/**
+ * Renders the RegionArticlePage component.
+ * 
+ * @returns {JSX.Element} The rendered RegionArticlePage component.
+ */
 
 const RegionArticlePage = () => {
     const [region, setRegion] = useState(null);

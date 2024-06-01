@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 import TestNavbar from './layout/TestNavbar/TestNavbar.jsx';
-
-import './App.css';
-import TestFooter from './layout/TestFooter/TestFooter.jsx';
 import CountryArticleHeader from './layout/CountryArticleHeader/CountryArticleHeader.jsx';
 import CountryArticleSection from './layout/CountryArticleSection/CountryArticleSection.jsx';
+import TestFooter from './layout/TestFooter/TestFooter.jsx';
 
+import './App.css';
+
+/**
+ * Renders the CountryArticlePage component.
+ * 
+ * @returns {JSX.Element} The rendered CountryArticlePage component.
+ */
 
 const CountryArticlePage = () => {
     const [country, setCountry] = useState(null);

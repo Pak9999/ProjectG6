@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import Button from '../../components/Button/Button';
+
 import exampleImage from '../../assets/images/italyarticleheader.png';
-import './ArticleHeader.css';
+import '../ArticleHeader/ArticleHeader.css';
+
+
+/**
+ * Renders the CityArticleHeader component for CITY.
+ * 
+ * @returns {JSX.Element} The rendered CityArticleHeader component.
+ */
 
 function CityArticleHeader() {
     const [city, setCity] = useState(null);

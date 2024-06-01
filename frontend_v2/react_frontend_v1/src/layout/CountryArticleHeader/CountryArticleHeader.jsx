@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import './ArticleHeader.css';  // Ensure you have the CSS file for styles
-import exampleImage from '../../assets/images/italyarticleheader.png';  // Import the default image
+
+import exampleImage from '../../assets/images/italyarticleheader.png';
+import '../ArticleHeader/ArticleHeader.css';
+
+/**
+ * Renders the CountryArticleHeader component for COUNTRY.
+ * 
+ * @returns {JSX.Element} The rendered CountryArticleHeader component.
+ */
 
 function CountryArticleHeader() {
     const [country, setCountry] = useState(null);

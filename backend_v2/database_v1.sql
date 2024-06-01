@@ -41,11 +41,6 @@ create table region_capital (
 	primary key (city_id, region_id)
 );
 
-insert into capital 
-values (3, 8)
-
-select * from capital 
-
 create table point_of_interest (
 	poi_id serial primary key,
 	poi_name varchar (60) not null,
@@ -68,32 +63,6 @@ create table language_in_country (
 	language_id int references language_table(language_id),
 	primary key (country_id, language_id)
 );
-
-select * from article
-
-update article 
-set content = 'Europe, a continent defined by its rich historical tapestry and diverse cultural heritage, is bordered by the Arctic Ocean to the north, the Atlantic Ocean to the west, and the Mediterranean Sea to the south. Its eastern boundary, stretching from the Ural Mountains to the Bosporus, marks the continental divide between Europe and Asia. Europe’s allure isn’t just in its landscapes but also in its vibrant cities and the remnants of its tumultuous history.
-
-Spanning a relatively small area, Europe boasts an astonishing variety of climates, from the temperate forested lands of Central Europe to the icy tundras of Scandinavia and the warm Mediterranean shores. This geographical diversity has fostered a similarly diverse array of lifestyles and traditions in the population.
-
-Europe is often viewed as the cradle of Western civilization, with its roots going back to ancient Greece, where democracy, philosophy, and scientific inquiry first flourished. The Roman Empire subsequently spread these ideas across Europe, laying the groundwork for modern governance, law, and culture. The Middle Ages saw the rise of powerful monarchies and the church, which played a significant role in shaping modern Europe through the Renaissance and the Reformation.
-
-The continent is renowned for its role in the artistic and intellectual history of the world. Europe was the birthplace of many of the great periods of art, including the Renaissance and the Baroque, which produced figures like Michelangelo, Leonardo da Vinci, and Rembrandt. European literature has had a profound impact globally, with authors such as Shakespeare, Cervantes, and Tolstoy.
-
-Modern Europe is known for its political and economic structures, notably the European Union (EU), which seeks to foster economic cooperation and ensure political stability among its member nations. The euro, used by 19 of the 27 member countries, is one of the world’s most significant currencies.
-
-European cuisine reflects the continent’s cultural diversity, with each country offering its own unique dishes and culinary techniques. From the rich pastries of Austria to the hearty stews of Hungary and the sophisticated sauces of France, European cuisine is a major aspect of its cultural identity.
-
-Europe also makes substantial contributions to the global economy, particularly through its automotive, manufacturing, and technology sectors. Education and innovation are highly valued, with numerous ancient universities and modern facilities pushing forward scientific research.
-
-Tourism is another vital industry, drawing visitors to historic cities like Paris, Berlin, and Rome, as well as to its scenic rural areas and vibrant cultural festivals. With a plethora of UNESCO World Heritage sites, Europe remains one of the most popular tourist destinations worldwide.
-
-In sports, Europe is at the forefront, hosting events like the UEFA Champions League and being home to many of the world’s most famous football clubs. The continent also excels in a variety of other sports, including tennis, cycling, and skiing.
-
-Europe’s complex and layered history, coupled with its ongoing influence in global affairs, continues to fascinate and inspire. It remains a continent of timeless appeal, celebrated for its artistic achievements, historical landmarks, and broad socioeconomic contributions to the world.
-
-//ChatGPT-4'
-where article_id = 1;
 
 CREATE TABLE article (
     article_id serial primary key,
@@ -124,14 +93,11 @@ create table article_tag (
 	primary key (article_id, tag_id)
 );
 
-
 create table img_dump (
 	img_id serial primary key,
 	img_name varchar(40),
 	img_url bytea
 )
-
-
 
 CREATE TABLE placed_img (
     image_id SERIAL PRIMARY KEY,
@@ -139,17 +105,6 @@ CREATE TABLE placed_img (
     image_url VARCHAR(255),
     FOREIGN KEY (article_id) REFERENCES article(article_id) ON DELETE CASCADE
 );
-
-select * from placed_img
-
-
-select * from full_continent_article
-
-insert into placed_img (article_id, image_url)
-values (7, 'images/southamerica.jpg')
-
-4
-
 
 ---------------GENERIC INSERTS----------------
 
@@ -174,7 +129,7 @@ create or replace function insert_article_with_geo_data(
     p_land_area int default null,
     p_climate varchar default null,
     p_parent_id int default null,
-    p_poi_parent_type varchar default null -- New parameter to specify if the POI's parent is a region or a city
+    p_poi_parent_type varchar default null
 ) returns void as $$
 declare
     v_place_id int;
@@ -230,7 +185,7 @@ begin
             raise exception 'Invalid geographical level: %', p_geographical_level;
     end case;
 
-    -- Insert the article with the correct reference based on the geographical level
+
     insert into article (under_title, content, continent_id, country_id, region_id, city_id, poi_id)
     values (
         p_under_title,
@@ -249,22 +204,20 @@ end;
 $$ language plpgsql;
 
 
-
---funktion för att mata in data--
+---------------FUNCTIONS TO ADD DATA----------------
 
 SELECT insert_article_with_geo_data(
     'Etna', -- Place name
     'Europas högsta aktiva vulkan', -- Under_title
     'Etna, eller ”Muncibeddu” som berget heter på sicilianska, har varit mer eller mindre aktiv i 500 000 år.', -- Content
     'point_of_interest', -- Geographical level
-    NULL, -- Population
-    NULL, -- Land area
-    NULL, -- Climate (region and city)
+    NULL, -- Population for country or city
+    NULL, -- Land area for country
+    NULL, -- Climate for region and city
     10, -- ID of parent
 	'region' -- Geo level of parent (city or region for POI)
 );
 
-select * from point_of_interest 
 
 insert into tag (tag_name)
 values ('Kultur') -- Adding tags
@@ -365,10 +318,6 @@ where location_name = 'Malmö'
 select * from full_poi_article
 where poi_name = 'Malmöhus slott'
 
-
-select * from region
-
-delete from article where article_id = 34
 
 
 
