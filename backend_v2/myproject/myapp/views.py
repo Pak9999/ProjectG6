@@ -1,14 +1,14 @@
 from django.shortcuts import render
-from .models import Continent, Country
+from django.http import JsonResponse
 
-from django.db import connection
+from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import generics
+from rest_framework.generics import RetrieveAPIView
+
 from .models import *
 from .serializers import *
-from rest_framework.generics import RetrieveAPIView
-from django.http import JsonResponse
+
 
 
 #API views for the different types of objects handled in the database
