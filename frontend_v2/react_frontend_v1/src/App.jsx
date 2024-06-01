@@ -14,7 +14,11 @@ import PointOfInterestArticlePage from './PointOfInterestArticlePage';  // Make 
 
 import ContinentComponent from './components/ContinentComponent/ContinentComponent.jsx';
 
-
+/**
+ * Renders the App component.
+ * 
+ * @returns {JSX.Element} The rendered App component.
+ */
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -41,7 +45,6 @@ function App() {
         <Route path="*" element={<NotFound />} />
 
         <Route path="/" element={<ContinentComponent countries={countries} />} />
-        
         <Route path="/continent/:continentId" element={<ContinentArticlePage />} />
 
         <Route path="/country/:countryId" element={<CountryArticlePage />} />

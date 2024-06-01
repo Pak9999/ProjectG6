@@ -7,6 +7,11 @@ import TestFooter from './layout/TestFooter/TestFooter.jsx';
 
 import './App.css';
 
+/**
+ * Renders the Home component.
+ * 
+ * @returns {JSX.Element} The rendered Home component.
+ */
 
 function Home() {
   return (

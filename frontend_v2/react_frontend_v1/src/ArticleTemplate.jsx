@@ -7,6 +7,11 @@ import TestFooter from './layout/TestFooter/TestFooter.jsx';
 
 import './App.css';
 
+/**
+ * Renders the ArticleTemplate component.
+ * 
+ * @returns {JSX.Element} The rendered ArticleTemplate component.
+ */
 
 
 function ArticleTemplate() {

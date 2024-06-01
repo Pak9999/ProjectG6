@@ -4,6 +4,12 @@ import { useParams } from 'react-router-dom';
 import exampleImage from '../../assets/images/italyarticleheader.png';
 import './ArticleHeader.css';
 
+/**
+ * Renders the ArticleHeader component for CONTINENT.
+ *
+ * @returns {JSX.Element} The rendered ArticleHeader component.
+ */
+
 function ArticleHeader() {
 
     const [continent, setContinent] = useState(null);

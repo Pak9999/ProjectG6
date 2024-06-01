@@ -3,6 +3,12 @@ import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import '../ArticleSection/ArticleSection.css';
 
+/**
+ * Renders the CountryArticleSection component for COUNTRY.
+ * 
+ * @returns {JSX.Element} The rendered CountryArticleSection component.
+ */
+
 function CountryArticleSection() {
     const [country, setCountry] = useState(null);
     const [hierarchy, setHierarchy] = useState([]);

@@ -4,7 +4,11 @@ import { useParams, Link } from 'react-router-dom';
 
 import './ArticleSection.css'
 
-// This component is used to display the article section of a continent
+/**
+ * Renders the ArticleSection component for CONTINENT.
+ * 
+ * @returns {JSX.Element} The rendered ArticleSection component.
+*/
 
 function ArticleSection() {
     const [continent, setContinent] = useState(null);
@@ -13,7 +17,6 @@ function ArticleSection() {
     useEffect(() => {
         const fetchContinent = async () => {
             try {
-                // This assumes that fetching the continent data gets all necessary details including countries within the continent
                 const response = await axios.get(`http://localhost:8000/api/continents/${continentId}`);
                 setContinent(response.data);
             } catch (error) {

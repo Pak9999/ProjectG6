@@ -10,6 +10,11 @@ import TestFooter from './layout/TestFooter/TestFooter.jsx';
 
 import './App.css';
 
+/**
+ * Renders the ContinentArticlePage component.
+ * 
+ * @returns {JSX.Element} The rendered ContinentArticlePage component.
+ */
 
 const ContinentArticlePage = () => {
   const [continent, setContinent] = useState(null);

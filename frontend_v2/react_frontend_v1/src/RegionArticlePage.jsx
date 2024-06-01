@@ -9,6 +9,11 @@ import TestFooter from './layout/TestFooter/TestFooter.jsx';
 
 import './App.css';
 
+/**
+ * Renders the RegionArticlePage component.
+ * 
+ * @returns {JSX.Element} The rendered RegionArticlePage component.
+ */
 
 const RegionArticlePage = () => {
     const [region, setRegion] = useState(null);

@@ -2,7 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import exampleImage from '../../assets/images/italyarticleheader.png';
-import './ArticleHeader.css';
+
+import '../ArticleHeader/ArticleHeader.css'
+
+/**
+ * Renders the RegionArticleHeader component for REGION.
+ * 
+ * @returns {JSX.Element} The rendered RegionArticleHeader component.
+ */
 
 function RegionArticleHeader() {
     const [region, setRegion] = useState(null);  // Changed from setCountry to setRegion for clarity

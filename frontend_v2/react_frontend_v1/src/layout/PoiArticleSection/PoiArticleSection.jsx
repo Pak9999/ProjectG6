@@ -3,6 +3,14 @@ import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import '../ArticleSection/ArticleSection.css';
 
+// This component is used to display the article section of a point of interest
+
+/**
+ * Renders the PoiArticleSection component for POI.
+ * 
+ * @returns {JSX.Element} The rendered PoiArticleSection component.
+ */
+
 function PoiArticleSection() {
     const [poi, setPoi] = useState(null);
     const [hierarchy, setHierarchy] = useState([]);

@@ -1,6 +1,12 @@
 import React from 'react';
 import './AboutContent.css';
 
+/**
+ * Renders the AboutContent component.
+ *
+ * @returns {JSX.Element} The rendered AboutContent component.
+ */
+
 function AboutContent() {
     return (
         <div className='about-container'>

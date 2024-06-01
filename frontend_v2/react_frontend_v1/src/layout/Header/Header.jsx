@@ -2,6 +2,12 @@ import bgvid from '../../assets/images/bgvid.mp4';
 import arrow from '../../assets/symbols/white-down-arrow-png-2.png';
 import './Header.css'
 
+/**
+ * Renders the Header component.
+ * 
+ * @returns {JSX.Element} The rendered Header component.
+ */
+
 function Header() {
 
 

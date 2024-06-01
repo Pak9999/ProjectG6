@@ -10,7 +10,11 @@ import TestFooter from './layout/TestFooter/TestFooter.jsx';
 import './App.css';
 
 
-
+/**
+ * Renders the PointOfInterestArticlePage component.
+ * 
+ * @returns {JSX.Element} The rendered PointOfInterestArticlePage component.
+ */
 
 const PointOfInterestArticlePage = () => {
     const [poi, setPoi] = useState(null);

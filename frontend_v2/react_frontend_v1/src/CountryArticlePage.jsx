@@ -9,7 +9,11 @@ import TestFooter from './layout/TestFooter/TestFooter.jsx';
 
 import './App.css';
 
-
+/**
+ * Renders the CountryArticlePage component.
+ * 
+ * @returns {JSX.Element} The rendered CountryArticlePage component.
+ */
 
 const CountryArticlePage = () => {
     const [country, setCountry] = useState(null);

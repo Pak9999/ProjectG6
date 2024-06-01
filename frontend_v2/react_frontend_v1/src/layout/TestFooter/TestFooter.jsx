@@ -1,5 +1,10 @@
 /* Denna filen inklusive TestFooter.css är en den nya uppdaterade versionen av navbaren - Gamla ska tas bort.*/
 
+/** 
+ * Renders the TestFooter component.
+ * 
+ * @returns {JSX.Element} The rendered TestFooter component.
+ */
 
 import React from 'react';
 import './TestFooter.css';
