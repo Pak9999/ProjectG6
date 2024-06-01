@@ -8,6 +8,15 @@ import "slick-carousel/slick/slick-theme.css";
 
 import './ContinentComponent.css';
 
+/**
+ * ContinentComponent fetches data from the Django backend and displays a list of continents in a Carousel using react slick.
+ * @returns {JSX.Element} Carousel of continents
+ * 
+ * Breakpoints for the Carousel:
+ * - 1024px: 4 slides
+ * - 600px: 2 slides
+ */
+
 const ContinentComponent = () => {
   const [continents, setContinents] = useState([]);
   const baseUrl = 'http://localhost:8000'; // This should be the base URL of your Django backend
