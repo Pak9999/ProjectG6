@@ -25,12 +25,12 @@ function TestFooter() {
           <small className='website-rights'>AWAY © 2024</small>
           <div className='social-icons'>
             <Link
-              className='social-icon-link twitter'
+              className='social-icon-link-twitter'
               to='https://github.com/Pak9999/ProjectG6'
               target='_blank'
               aria-label='LinkedIn'
             >
-              <img src={github} alt="Github" />
+              <img className='git-icon' src={github} alt="Github" />
             </Link>
           </div>
         </div>
