@@ -5,12 +5,6 @@ import exampleImage from '../../assets/images/italyarticleheader.png';
 import './ArticleHeader.css';
 
 function ArticleHeader() {
-    const navigateToArticleSection = () => {
-        const element = document.getElementById('home');
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
 
     const [continent, setContinent] = useState(null);
     const { continentId } = useParams();

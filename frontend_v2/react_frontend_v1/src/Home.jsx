@@ -1,16 +1,11 @@
 import React from 'react';
 
+import TestNavbar from './layout/TestNavbar/TestNavbar.jsx';
 import Header from './layout/Header/Header.jsx'
-
-
-import './App.css';
-
+import ContinentComponent from './components/ContinentComponent/ContinentComponent.jsx';
 import TestFooter from './layout/TestFooter/TestFooter.jsx';
 
-
-import TestNavbar from './layout/TestNavbar/TestNavbar.jsx';
-
-import ContinentComponent from './components/ContinentComponent/ContinentComponent.jsx';
+import './App.css';
 
 
 function Home() {
@@ -18,14 +13,8 @@ function Home() {
     <>
       <TestNavbar></TestNavbar>
       <Header></Header>
-
       <ContinentComponent></ContinentComponent>
-
       <TestFooter></TestFooter>
-
-
-
-
     </>
   );
 }

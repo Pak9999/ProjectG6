@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 import TestNavbar from './layout/TestNavbar/TestNavbar.jsx';
 import ArticleHeader from './layout/ArticleHeader/ArticleHeader.jsx';
-import SubHeader from './layout/SubHeader/SubHeader.jsx';
-
 import ArticleSection from './layout/ArticleSection/ArticleSection.jsx';
+import TestFooter from './layout/TestFooter/TestFooter.jsx';
 
 
 import './App.css';
-import TestFooter from './layout/TestFooter/TestFooter.jsx';
 
 
 const ContinentArticlePage = () => {
@@ -45,10 +42,6 @@ const ContinentArticlePage = () => {
       <TestFooter />
 
     </>
-
-
-
-
   );
 };
 

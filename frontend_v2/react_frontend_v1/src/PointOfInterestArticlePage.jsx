@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 import TestNavbar from './layout/TestNavbar/TestNavbar.jsx';
-
-import './App.css';
-import TestFooter from './layout/TestFooter/TestFooter.jsx';
 import PoiArticleHeader from './layout/PoiArticleHeader/PoiArticleHeader.jsx';
 import PoiArticleSection from './layout/PoiArticleSection/PoiArticleSection.jsx';
+import TestFooter from './layout/TestFooter/TestFooter.jsx';
+
+import './App.css';
+
+
+
 
 const PointOfInterestArticlePage = () => {
     const [poi, setPoi] = useState(null);
