@@ -8,13 +8,14 @@ from rest_framework import generics
 from .models import *
 from .serializers import *
 from rest_framework.generics import RetrieveAPIView
+from django.http import JsonResponse
 
 
-
+#API views for the different types of objects handled in the database
 
 class ArticleDetailAPIView(generics.RetrieveAPIView):
     '''
-    Retrieve a specific article.
+    Class-based view to retrieve a specific article.
 
     Attributes:
     - queryset: Queryset of all Article objects
@@ -29,9 +30,9 @@ class ArticleDetailAPIView(generics.RetrieveAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
 
-class ArticleListAPIView(generics.ListAPIView):     #Showed on /articles/
+class ArticleListAPIView(generics.ListAPIView):
     '''
-    List all articles.
+    Class-based view to retrieve all articles.
 
     Attributes:
     - queryset: Queryset of all Article objects
@@ -47,9 +48,9 @@ class ArticleListAPIView(generics.ListAPIView):     #Showed on /articles/
     serializer_class = ArticleSerializer
     
 
-class ContinentListAPIView(APIView):  #Showed on startpage
+class ContinentListAPIView(APIView):
     '''
-    List all continents with their respective articles.
+    Class-based view to retrieve all continents.
     
     Attributes:
     - continents: Queryset of all Continent objects
@@ -67,9 +68,9 @@ class ContinentListAPIView(APIView):  #Showed on startpage
         return Response(serializer.data)
     
     
-class ContinentDetailAPIView(RetrieveAPIView): #Showed on /continents/<int:continent_id>/  Specific data for continent articles
+class ContinentDetailAPIView(RetrieveAPIView):
     '''
-    Retrieve a specific continent with its articles.
+    Class-based view to retrieve a specific continent.
 
     Attributes:
     - queryset: Queryset of all Continent objects
@@ -84,12 +85,12 @@ class ContinentDetailAPIView(RetrieveAPIView): #Showed on /continents/<int:conti
     '''
     queryset = Continent.objects.all()
     serializer_class = ContinentSerializer
-    lookup_field = 'continent_id'  # Ensure this field matches the primary key field in your Continent model
+    lookup_field = 'continent_id' 
 
 
-class CountryListAPIView(APIView): #Showed as lists on continent articles
+class CountryListAPIView(APIView):
     '''
-    List all countries with their respective articles.
+    Class-based view to retrieve all countries.
 
     Attributes:
     - countries: Queryset of all Country objects
@@ -103,14 +104,14 @@ class CountryListAPIView(APIView): #Showed as lists on continent articles
     '''
 
     def get(self, request):
-        countries = Country.objects.all()  # Retrieve all countries from the database
-        serializer = CountrySerializer(countries, many=True)  # Serialize the queryset
-        return Response(serializer.data)  # Return serialized data as a response
+        countries = Country.objects.all() 
+        serializer = CountrySerializer(countries, many=True)
+        return Response(serializer.data)
 
 
-class CountryDetailAPIView(RetrieveAPIView): #Showed on /countries/<int:country_id>/  Specific data for country articles
+class CountryDetailAPIView(RetrieveAPIView):
     '''
-    Retrieve a specific country with its articles.
+    Class-based view to retrieve a specific country.
 
     Attributes:
     - queryset: Queryset of all Country objects
@@ -128,7 +129,7 @@ class CountryDetailAPIView(RetrieveAPIView): #Showed on /countries/<int:country_
     lookup_field = 'country_id'
 
 
-class RegionListAPIView(APIView): #Showed as lists on country articles
+class RegionListAPIView(APIView): 
     '''
     List all regions with their respective articles.
 
@@ -143,12 +144,12 @@ class RegionListAPIView(APIView): #Showed as lists on country articles
     - get: Retrieve all regions and return them as a response    
     '''
     def get(self, request):
-        regions = Region.objects.all()  # Retrieve all regions from the database
-        serializer = RegionSerializer(regions, many=True)  # Serialize the queryset
-        return Response(serializer.data)  # Return serialized data as a response
+        regions = Region.objects.all()
+        serializer = RegionSerializer(regions, many=True)
+        return Response(serializer.data)
 
 
-class RegionDetailAPIView(RetrieveAPIView): #Showed on /regions/<int:region_id>/  Specific data for region articles
+class RegionDetailAPIView(RetrieveAPIView):
     '''
     Retrieve a specific region with its articles.
 
@@ -168,7 +169,7 @@ class RegionDetailAPIView(RetrieveAPIView): #Showed on /regions/<int:region_id>/
     lookup_field = 'region_id'
 
 
-class CityListAPIView(APIView): #Showed as lists on region articles
+class CityListAPIView(APIView):
     '''
     List all cities with their respective articles.
 
@@ -183,12 +184,12 @@ class CityListAPIView(APIView): #Showed as lists on region articles
     - get: Retrieve all cities and return them as a response
     '''
     def get(self, request):
-        cities = City.objects.all()  # Retrieve all cities from the database
-        serializer = CitySerializer(cities, many=True)  # Serialize the queryset
-        return Response(serializer.data)  # Return serialized data as a response    
+        cities = City.objects.all() 
+        serializer = CitySerializer(cities, many=True)
+        return Response(serializer.data)  
     
 
-class CityDetailAPIView(RetrieveAPIView):  #Showed on /cities/<int:city_id>/  Specific data for city articles
+class CityDetailAPIView(RetrieveAPIView):
     '''
     Retrieve a specific city with its articles.
 
@@ -205,10 +206,10 @@ class CityDetailAPIView(RetrieveAPIView):  #Showed on /cities/<int:city_id>/  Sp
     '''
     queryset = City.objects.all()
     serializer_class = CitySerializer
-    lookup_field = 'city_id'  # Ensure this field matches the primary key field in your City model
+    lookup_field = 'city_id'
 
 
-class PointOfInterestListAPIView(APIView): #Showed as lists on city articles
+class PointOfInterestListAPIView(APIView):
     '''
     List all points of interest.
 
@@ -223,9 +224,9 @@ class PointOfInterestListAPIView(APIView): #Showed as lists on city articles
     - get: Retrieve all points of interest and return them as a response    
     '''
     def get(self, request):
-        points_of_interest = PointOfInterest.objects.all()  # Retrieve all POIs from the database
-        serializer = PointOfInterestSerializer(points_of_interest, many=True)  # Serialize the queryset
-        return Response(serializer.data)  # Return serialized data as a response
+        points_of_interest = PointOfInterest.objects.all()
+        serializer = PointOfInterestSerializer(points_of_interest, many=True)
+        return Response(serializer.data)
     
 
 class PointOfInterestDetailAPIView(RetrieveAPIView):
@@ -245,182 +246,88 @@ class PointOfInterestDetailAPIView(RetrieveAPIView):
     ''' 
     queryset = PointOfInterest.objects.all()
     serializer_class = PointOfInterestSerializer
-    lookup_field = 'poi_id'  # Ensure this field matches the primary key field in your PointOfInterest model
+    lookup_field = 'poi_id'
 
 
 
 
-def continent_data(request):
-    # Execute raw SQL query to fetch data from the view
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT * FROM full_continent_article")
-        articles = cursor.fetchall()
-
-    headers = ['Article ID', 'Continent ID', 'Continent Name', 'Under Title', 'Content']
-    return render(request, 'myapp/continent_data.html', {'articles': articles, 'headers': headers})
-
-
-def list_continents(request):
-    continents = Continent.objects.all()
-    return render(request, 'myapp/list_continents.html', {'continents': continents})
-
-
-def continent_detail(request, continent_id):
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT * FROM full_continent_article WHERE continent_id = %s", [continent_id])
-        article = cursor.fetchone()
-
-        # Optional: Fetch countries in the continent, if not already done
-        cursor.execute("SELECT country_id, country_name FROM country WHERE continent_id = %s", [continent_id])
-        countries = cursor.fetchall()
-
-    return render(request, 'myapp/continent_detail.html', {
-        'article': article,
-        'countries': countries,
-        'continent_id': continent_id
-    })
-
-
-def country_detail(request, country_id):
-    with connection.cursor() as cursor:
-        cursor.execute("""
-            SELECT a.article_id, c.country_id, c.country_name, a.under_title, c.population, c.land_area, k.continent_id, k.continent_name, a.content
-            FROM country c
-            JOIN article a ON c.country_id = a.country_id
-            JOIN continent k ON c.continent_id = k.continent_id
-            WHERE c.country_id = %s
-        """, [country_id])
-        article = cursor.fetchone()
-
-        # Fetch regions within the country
-        cursor.execute("SELECT region_id, region_name FROM region WHERE country_id = %s", [country_id])
-        regions = cursor.fetchall()
-
-    return render(request, 'myapp/country_detail.html', {
-        'article': article,
-        'regions': regions,
-        'country_id': country_id,
-        'continent_id': article[6] if article else None  # Accessing continent_id safely
-    })
-
-
-def region_detail(request, region_id):
-    with connection.cursor() as cursor:
-        # Fetch the region's detailed article along with country and continent details
-        cursor.execute("""
-            SELECT a.article_id, r.region_id, r.region_name, a.under_title, r.climate, a.content, 
-                c.country_id, c.country_name, k.continent_id, k.continent_name
-            FROM region r 
-            JOIN article a ON r.region_id = a.region_id
-            JOIN country c ON c.country_id = r.country_id
-            JOIN continent k ON c.continent_id = k.continent_id
-            WHERE r.region_id = %s
-        """, [region_id])
-        article = cursor.fetchone()
-
-        # Fetch cities within the region
-        cursor.execute("SELECT city_id, city_name FROM city WHERE region_id = %s", [region_id])
-        cities = cursor.fetchall()
-
-        # Fetch Points of Interest related to the region
-        cursor.execute("SELECT poi_id, poi_name FROM point_of_interest WHERE in_region = %s", [region_id])
-        pois = cursor.fetchall()
-
-    return render(request, 'myapp/region_detail.html', {
-        'article': article,
-        'cities': cities,
-        'pois': pois,
-        'region_id': region_id,
-        'country_id': article[6] if article else None,
-        'continent_id': article[8] if article else None,
-        'continent_name': article[9] if article else None
-    })
-
-
-
-
-def city_detail(request, city_id):
-    with connection.cursor() as cursor:
-        cursor.execute("""
-            SELECT a.article_id, ci.city_id, ci.city_name, a.under_title, ci.population, ci.climate, a.content, r.region_id, r.region_name, c.country_id, c.country_name, k.continent_id, k.continent_name
-            FROM city ci
-            JOIN article a ON ci.city_id = a.city_id
-            JOIN region r ON r.region_id = ci.region_id
-            JOIN country c ON c.country_id = r.country_id
-            JOIN continent k ON c.continent_id = k.continent_id
-            WHERE ci.city_id = %s
-        """, [city_id])
-        article = cursor.fetchone()
-
-        # Fetch Points of Interest related to the city
-        cursor.execute("SELECT poi_id, poi_name FROM point_of_interest WHERE in_city = %s", [city_id])
-        pois = cursor.fetchall()
-
-    return render(request, 'myapp/city_detail.html', {
-        'article': article,
-        'pois': pois,
-        'city_id': city_id,
-        'region_id': article[7],  # Assuming index for region_id
-        'region_name': article[8],  # Assuming index for region_name
-        'country_id': article[9],  # Assuming index for country_id
-        'country_name': article[10],  # Assuming index for country_name
-        'continent_id': article[11],  # Assuming index for continent_id
-        'continent_name': article[12]  # Assuming index for continent_name
-    })
-
-
-def poi_detail(request, poi_id):
-    with connection.cursor() as cursor:
-        cursor.execute("""
-            SELECT a.article_id, p.poi_id, p.poi_name, a.under_title,
-                ci.city_name, r.region_name, a.content,
-                ci.city_id, r.region_id,
-                c.country_id, c.country_name,
-                k.continent_id, k.continent_name
-            FROM point_of_interest p
-            LEFT JOIN article a ON p.poi_id = a.poi_id
-            LEFT JOIN city ci ON p.in_city = ci.city_id
-            LEFT JOIN region r ON (ci.region_id = r.region_id OR p.in_region = r.region_id)
-            LEFT JOIN country c ON r.country_id = c.country_id
-            LEFT JOIN continent k ON c.continent_id = k.continent_id
-            WHERE p.poi_id = %s
-        """, [poi_id])
-        article = cursor.fetchone()
-
-    return render(request, 'myapp/poi_detail.html', {
-        'article': article,
-        'poi_id': poi_id,
-        'city_id': article[7],
-        'city_name': article[4],
-        'region_id': article[8],
-        'region_name': article[5],
-        'country_id': article[9],
-        'continent_id': article[11]
-    })
-
-from django.http import JsonResponse
+#Views used in article form
 
 def get_continents(request):
-    continents = Continent.objects.all()  # Retrieve all continents from the database
+    '''
+    Function to get all continents from the database for the dropdown menu.
+    Attributes:
+    - continents: Queryset of all Continent objects
+    - continent_data: List of dictionaries containing the ID and name of each continent
+    Usage:
+    - GET request to /ajax/get_continents/ to retrieve all continents
+    Returns:
+    - JsonResponse: JSON response containing the list of continents
+    '''
+    continents = Continent.objects.all()
     continent_data = [{'id': continent.continent_id, 'name': continent.continent_name} for continent in continents]
     return JsonResponse({'continents': continent_data})
 
 def get_countries_for_continent(request):
+    '''
+    Function to get all countries for a specific continent for the dropdown menu.
+    Attributes:
+    - continent_id: ID of the selected continent
+    - countries: Queryset of all Country objects filtered by continent_id
+    - country_data: List of dictionaries containing the ID and name of each country
+    Usage:
+    - GET request to /ajax/get_countries_for_continent/?continent_id=<continent_id> to retrieve all countries for a specific continent
+    Returns:
+    - JsonResponse: JSON response containing the list of countries
+    '''
     continent_id = request.GET.get('continent_id')
     countries = Country.objects.filter(continent_id=continent_id).values('country_id', 'country_name')
     return JsonResponse(list(countries), safe=False)
 
 def get_regions_for_country(request):
+    '''
+    Function to get all regions for a specific country for the dropdown menu.
+    Attributes:
+    - country_id: ID of the selected country
+    - regions: Queryset of all Region objects filtered by country_id
+    - region_data: List of dictionaries containing the ID and name of each region
+    Usage:
+    - GET request to /ajax/get_regions_for_country/?country_id=<country_id> to retrieve all regions for a specific country
+    Returns:
+    - JsonResponse: JSON response containing the list of regions
+    '''
     country_id = request.GET.get('country_id')
     regions = Region.objects.filter(country_id=country_id).values('region_id', 'region_name')
     return JsonResponse(list(regions), safe=False)
 
 def get_cities_for_region(request):
+    '''
+    Function to get all cities for a specific region for the dropdown menu.
+    Attributes:
+    - region_id: ID of the selected region
+    - cities: Queryset of all City objects filtered by region_id
+    - city_data: List of dictionaries containing the ID and name of each city
+    Usage:
+    - GET request to /ajax/get_cities_for_region/?region_id=<region_id> to retrieve all cities for a specific region
+    Returns:
+    - JsonResponse: JSON response containing the list of cities
+    '''
     region_id = request.GET.get('region_id')
     cities = City.objects.filter(region_id=region_id).values('city_id', 'city_name')
     return JsonResponse(list(cities), safe=False)
 
 def get_pois_for_city(request):
+    '''
+    Function to get all points of interest for a specific city for the dropdown menu.
+    Attributes:
+    - city_id: ID of the selected city
+    - pois: Queryset of all PointOfInterest objects filtered by city_id
+    - poi_data: List of dictionaries containing the ID and name of each point of interest
+    Usage:
+    - GET request to /ajax/get_pois_for_city/?city_id=<city_id> to retrieve all points of interest for a specific city
+    Returns:
+    - JsonResponse: JSON response containing the list of points of interest
+    '''
     city_id = request.GET.get('city_id')
     region_id = request.GET.get('region_id')
 
@@ -433,18 +340,50 @@ def get_pois_for_city(request):
 
     return JsonResponse(list(pois), safe=False)
 
-# Add new views to fetch parent IDs based on selected options
+
+
+# Functions used in the article form to get the ID of the country, region and city based on the selected continent, country and region
 def get_country_id_for_continent(request):
+    '''
+    Function to get the ID of the country based on the selected continent calling the model function get_country_id_based_on_continent.
+    Attributes:
+    - continent_id: ID of the selected continent
+    - country_id: ID of the country based on the selected continent
+    Usage:
+    - GET request to /ajax/get_country_id_for_continent/?continent_id=<continent_id> to retrieve the ID of the country based on the selected continent
+    Returns:
+    - JsonResponse: JSON response containing the ID of the country
+    '''
     continent_id = request.GET.get('continent_id')
     country_id = get_country_id_based_on_continent(continent_id)
     return JsonResponse({'country_id': country_id})
 
 def get_region_id_for_country(request):
+    '''
+    Function to get the ID of the region based on the selected country calling the model function get_region_id_based_on_country.
+    Attributes:
+    - country_id: ID of the selected country
+    - region_id: ID of the region based on the selected country
+    Usage:
+    - GET request to /ajax/get_region_id_for_country/?country_id=<country_id> to retrieve the ID of the region based on the selected country
+    Returns:
+    - JsonResponse: JSON response containing the ID of the region
+    '''
     country_id = request.GET.get('country_id')
     region_id = get_region_id_based_on_country(country_id)
     return JsonResponse({'region_id': region_id})
 
 def get_city_id_for_region(request):
+    '''
+    Function to get the ID of the city based on the selected region calling the model function get_city_id_based_on_region.
+    Attributes:
+    - region_id: ID of the selected region
+    - city_id: ID of the city based on the selected region
+    Usage:
+    - GET request to /ajax/get_city_id_for_region/?region_id=<region_id> to retrieve the ID of the city based on the selected region
+    Returns:
+    - JsonResponse: JSON response containing the ID of the city
+    '''
     region_id = request.GET.get('region_id')
     city_id = get_city_id_based_on_region(region_id)
     return JsonResponse({'city_id': city_id})
