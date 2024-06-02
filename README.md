@@ -38,7 +38,7 @@ https://www.python.org/downloads/
 
 ## Download and install Node.js if you don't have it
 ```bash
-https://nodejs.org/en/download/package-manager
+https://nodejs.org/en/download/prebuilt-installer
 ```
 ## Run Locally on Windows
 To install the backend open the myproject directory in a terminal<br>
