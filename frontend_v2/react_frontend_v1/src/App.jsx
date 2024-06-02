@@ -43,18 +43,13 @@ function App() {
         <Route path="/article-template" element={<ArticleTemplate />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
-
-        <Route path="/" element={<ContinentComponent countries={countries} />} />
+        <Route path="/search" element={<SearchResultSection />} />
+        <Route path="/articles/:articleId" element={<ArticleDetail />} /> {/* Add this line */}
         <Route path="/continent/:continentId" element={<ContinentArticlePage />} />
-
         <Route path="/country/:countryId" element={<CountryArticlePage />} />
-
         <Route path="/region/:regionId" element={<RegionArticlePage />} />
-
         <Route path="/city/:cityId" element={<CityArticlePage />} />
-
         <Route path="/poi/:poiId" element={<PointOfInterestArticlePage />} />
-
       </Routes>
     </Router>
   );

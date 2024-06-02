@@ -9,12 +9,20 @@
 
 import React, { useState } from 'react';
 import './TestNavbar.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 
 
 function TestNavbar() {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        navigate(`/search?q=${searchQuery}`);
+    };
+
 
     return (
         <nav className="test-navbar">
@@ -38,13 +46,21 @@ function TestNavbar() {
                 <li className="test-nav-item">
                     <Link to="/About" className='test-nav-links'>About</Link>
                 </li>
-
-                
+                <li className="test-nav-item">
+                    <form onSubmit={handleSearch}>
+                        <input 
+                            type="text" 
+                            placeholder="Search..." 
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="search-input"
+                        />
+                        <button type="submit" className="search-button">Search</button>
+                    </form>
+                </li>
             </ul>
-
         </nav>
     );
 }
 
 export default TestNavbar;
-

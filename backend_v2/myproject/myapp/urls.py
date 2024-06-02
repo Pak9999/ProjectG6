@@ -9,6 +9,14 @@ urlpatterns = [
     path('api/articles/<int:pk>/', views.ArticleDetailAPIView.as_view(), name='article-detail'),
     path('api/articles/', ArticleListAPIView.as_view(), name='article-list'),
     
+    path('api/continents/search/', ContinentSearchAPIView.as_view(), name='article-search'),
+    path('search/', views.continent_search_view, name='search'),
+    
+    path('api/search/', ContinentSearchAPIView.as_view(), name='article-search-api'),
+    path('search/', continent_search_view, name='search'),
+
+
+
     path('api/continents/', ContinentListAPIView.as_view(), name='continent-list'),
     path('api/continents/<int:continent_id>/', views.ContinentDetailAPIView.as_view(), name='continent-detail'),
 
