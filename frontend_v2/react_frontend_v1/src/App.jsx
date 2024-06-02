@@ -11,14 +11,9 @@ import CountryArticlePage from './CountryArticlePage'; // Adjust the path based 
 import RegionArticlePage from './RegionArticlePage';  // Make sure this import is correct
 import CityArticlePage from './CityArticlePage';  // Make sure this import is correct
 import PointOfInterestArticlePage from './PointOfInterestArticlePage';  // Make sure this import is correct
-
+import SearchResultSection from './layout/SearchResultSection/SearchResultSection';
 import ContinentComponent from './components/ContinentComponent/ContinentComponent.jsx';
 
-/**
- * Renders the App component.
- * 
- * @returns {JSX.Element} The rendered App component.
- */
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -44,7 +39,6 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/search" element={<SearchResultSection />} />
-        <Route path="/articles/:articleId" element={<ArticleDetail />} /> {/* Add this line */}
         <Route path="/continent/:continentId" element={<ContinentArticlePage />} />
         <Route path="/country/:countryId" element={<CountryArticlePage />} />
         <Route path="/region/:regionId" element={<RegionArticlePage />} />
