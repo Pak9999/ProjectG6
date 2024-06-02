@@ -7,10 +7,10 @@ import ArticleTemplate from './ArticleTemplate.jsx';
 import NotFound from './NotFound.jsx';
 import About from './About.jsx';
 import ContinentArticlePage from './ContinentArticlePage.jsx';
-import CountryArticlePage from './CountryArticlePage'; // Adjust the path based on your file structure
-import RegionArticlePage from './RegionArticlePage';  // Make sure this import is correct
-import CityArticlePage from './CityArticlePage';  // Make sure this import is correct
-import PointOfInterestArticlePage from './PointOfInterestArticlePage';  // Make sure this import is correct
+import CountryArticlePage from './CountryArticlePage'; 
+import RegionArticlePage from './RegionArticlePage';  
+import CityArticlePage from './CityArticlePage';  
+import PointOfInterestArticlePage from './PointOfInterestArticlePage'; 
 import SearchResults from './SearchResults';
 import ContinentComponent from './components/ContinentComponent/ContinentComponent.jsx';
 
