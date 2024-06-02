@@ -20,7 +20,18 @@ Clone the project
   git clone https://github.com/Pak9999/ProjectG6
 ```
 
-Go to the project directory
+Open the project in your IDE/code editor of choice and run it there or do it in standalone terminals
+
+Add the privately shared database connection details acording to this template into the .env.example in the myproject directory
+```bash
+DB_NAME=xxxx
+DB_USER=xxxx
+DB_PASSWORD=xxxx
+DB_HOST=xxxx
+DB_PORT=xxxx
+```
+## Run Locally on Windows
+To run the the back end open the the myproject directory
 
 ```bash
   cd myproject
@@ -29,15 +40,6 @@ To install the python dependencies, run:
 
 ```bash
   pip install -r requirements.txt
-```
-
-Add the private database connection details acording to this template into the .env.example
-```bash
-DB_NAME=xxxx
-DB_USER=xxxx
-DB_PASSWORD=xxxx
-DB_HOST=xxxx
-DB_PORT=xxxx
 ```
 
 Go to the frontend directory
@@ -61,7 +63,7 @@ Start the backend-server
   py manage.py runserver
 ```
 
-Start the backend-server
+Start the front-server
 ```bash
   cd react_frontend_v1
 ```
@@ -69,6 +71,54 @@ Start the backend-server
 ```bash
   npm run dev
 ```
+
+
+
+
+## Run Locally on macOS
+To run the the back end open the the myproject directory
+
+```bash
+  cd myproject
+```
+
+To install the python dependencies, run:
+
+```bash
+  pip3 install -r requirements.txt
+```
+
+Go to the frontend directory
+
+```bash
+  cd react_frontend_v1
+```
+
+To install the dependencies and set up the front-end, run:
+
+```bash
+  npm install 
+```
+
+Start the backend-server
+```bash
+  cd myproject
+```
+
+```bash
+  python3 manage.py runserver
+```
+
+
+Start the frontend-server
+```bash
+  cd react_frontend_v1
+```
+
+```bash
+  npm run dev
+```
+
 
 ## Authors
 
