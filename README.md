@@ -30,12 +30,22 @@ DB_PASSWORD=xxxx
 DB_HOST=xxxx
 DB_PORT=xxxx
 ```
+## Download and install python if you don't have it
+```bash
+https://www.python.org/downloads/
+```
+
+## Download and install Node.js if you don't have it
+```bash
+https://nodejs.org/en/download/package-manager
+```
 ## Run Locally on Windows
 To run the the back end open the the myproject directory
 
 ```bash
-  cd myproject
+  cd backend_v2\myproject
 ```
+
 To install the python dependencies, run:
 
 ```bash
@@ -45,18 +55,26 @@ To install the python dependencies, run:
 Go to the frontend directory
 
 ```bash
-  cd react_frontend_v1
+  cd frontend_v2\react_frontend_v1
 ```
 
 To install the dependencies and set up the front-end, run:
 
 ```bash
-  npm install 
+  npm i vite axios react react-slick slick-carousel  
+```
+
+```bash
+  npm install
+```
+
+```bash
+  npm install -g create-vite
 ```
 
 Start the backend-server
 ```bash
-  cd myproject
+  cd backend_v2\myproject
 ```
 
 ```bash
@@ -65,7 +83,7 @@ Start the backend-server
 
 Start the front-server
 ```bash
-  cd react_frontend_v1
+  cd frontend_v2\react_frontend_v1
 ```
 
 ```bash
@@ -79,7 +97,7 @@ Start the front-server
 To run the the back end open the the myproject directory
 
 ```bash
-  cd myproject
+  cd backend_v2\myproject
 ```
 
 To install the python dependencies, run:
@@ -91,18 +109,26 @@ To install the python dependencies, run:
 Go to the frontend directory
 
 ```bash
-  cd react_frontend_v1
+  cd frontend_v2\react_frontend_v1
 ```
 
 To install the dependencies and set up the front-end, run:
 
 ```bash
-  npm install 
+  npm i vite axios react react-slick slick-carousel  
+```
+
+```bash
+  npm install
+```
+
+```bash
+  npm install -g create-vite
 ```
 
 Start the backend-server
 ```bash
-  cd myproject
+  cd backend_v2\myproject
 ```
 
 ```bash
@@ -112,7 +138,7 @@ Start the backend-server
 
 Start the frontend-server
 ```bash
-  cd react_frontend_v1
+  cd frontend_v2\react_frontend_v1
 ```
 
 ```bash
