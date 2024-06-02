@@ -7,7 +7,7 @@
 
 A travel site based on articles which are stored in different levels like Continent, Country, Region, City and Point of interest.
 
-## Screenshots
+## Demo Gif
 
 ![App Screenshot](frontend_v2/react_frontend_v1/src/assets/images/firefox_TkKSez9KHu-ezgif.com-optimize(1).gif)
 
