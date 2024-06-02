@@ -34,6 +34,7 @@ function SearchResultSection() {
 
     return (
         <main className="search-result-main">
+            <div className='result-box'>
             <h1>Search Results for: {query}</h1>
             {loading && <p>Loading...</p>}
             {error && <p className="error">{error}</p>}
@@ -94,6 +95,7 @@ function SearchResultSection() {
                 </div>
             ))}
             {!loading && searchResults.length === 0 && <p>No results found.</p>}
+            </div>
         </main>
     );
 }
