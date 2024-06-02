@@ -40,7 +40,7 @@ https://www.python.org/downloads/
 https://nodejs.org/en/download/package-manager
 ```
 ## Run Locally on Windows
-To install the backend open the myproject directory
+To install the backend open the myproject directory in a terminal<br>
 ![App Screenshot](frontend_v2/react_frontend_v1/src/assets/images/backend.gif)
 
 ```bash
@@ -53,7 +53,7 @@ To install the python dependencies, run:
   pip install -r requirements.txt
 ```
 
-Go to the frontend directory
+Go to the frontend directory in a terminal<br>
 ![App Screenshot](frontend_v2/react_frontend_v1/src/assets/images/frontend.gif)
 ```bash
   cd frontend_v2\react_frontend_v1
@@ -95,7 +95,7 @@ Start the front-server
 
 
 ## Run Locally on macOS
-To install the backend open the myproject directory
+To install the backend open the myproject directory in a terminal<br>
 ![App Screenshot](frontend_v2/react_frontend_v1/src/assets/images/backend.gif)
 ```bash
   cd backend_v2\myproject
@@ -107,7 +107,7 @@ To install the python dependencies, run:
   pip3 install -r requirements.txt
 ```
 
-Go to the frontend directory
+Go to the frontend directory in a terminal<br>
 ![App Screenshot](frontend_v2/react_frontend_v1/src/assets/images/frontend.gif)
 ```bash
   cd frontend_v2\react_frontend_v1
