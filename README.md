@@ -22,7 +22,8 @@ Clone the project
 
 Open the project in your IDE/code editor of choice and run it there or do it in standalone terminals
 
-Add the privately shared database connection details acording to this template into the .env.example in the myproject directory
+Add the privately shared database connection details acording to this template into the .env.example in the backend_v2\myproject directory
+
 ```bash
 DB_NAME=xxxx
 DB_USER=xxxx
